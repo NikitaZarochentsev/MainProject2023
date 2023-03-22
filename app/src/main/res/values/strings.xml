@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MainProject</string>
+
+    <string name="catalog_title">Каталог</string>
+
+    <string name="item_menu_profile">Профиль</string>
+
+    <string name="buy_text">Купить</string>
+
+    <string name="button_refresh">Обновить</string>
+    <string name="child_exception_text">ProgressContainer can host only one direct child</string>
+    <string name="cost_rubles">%1$s ₽</string>
+
+    <string name="progress_container_empty_title">Товары не обнаружены</string>
+    <string name="progress_container_empty_description">Попробуйте обновить, вдруг товары появились</string>
+    <string name="progress_container_error_title">Произошла непредвиденная ошибка</string>
+    <string name="progress_container_error_description">Детальный текст ошибки, занимающий несколько строк</string>
+</resources>

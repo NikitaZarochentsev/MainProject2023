@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Base.V27.Theme" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:navigationBarColor">@color/black_20pc</item>
+    </style>
+
+    <style name="Theme.MainProject" parent="Base.V27.Theme">
+        <item name="colorPrimary">@color/smalt</item>
+        <item name="colorSurface">@color/smalt</item>
+        <item name="android:statusBarColor">@color/dark_smalt</item>
+    </style>
+
+    <style name="ThemeOverlay.Material3.Toolbar.Surface.Catalog">
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+</resources>
