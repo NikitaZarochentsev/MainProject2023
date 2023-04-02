@@ -7,7 +7,10 @@ import androidx.fragment.app.commit
 import com.example.mainproject.R
 import com.example.mainproject.databinding.ActivityMainBinding
 import com.example.mainproject.presentation.ui.catalog.CatalogFragment
+import com.example.mainproject.presentation.ui.signin.SignInFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         supportFragmentManager.commit {
-            replace(R.id.fragmentContainerViewMain, CatalogFragment())
+            replace(R.id.fragmentContainerViewMain, SignInFragment())
         }
     }
 }

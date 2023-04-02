@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainproject.R
-import com.example.mainproject.data.models.Product
+import com.example.mainproject.domain.models.Product
 
 class ProductAdapter :
     RecyclerView.Adapter<ProductViewHolder>() {

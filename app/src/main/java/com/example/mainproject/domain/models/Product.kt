@@ -1,4 +1,4 @@
-package com.example.mainproject.data.models
+package com.example.mainproject.domain.models
 
 data class Product(
     val productId: String,

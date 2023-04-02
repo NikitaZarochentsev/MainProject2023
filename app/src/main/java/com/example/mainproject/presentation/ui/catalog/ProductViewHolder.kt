@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.mainproject.R
-import com.example.mainproject.data.models.Product
+import com.example.mainproject.domain.models.Product
 import com.example.mainproject.databinding.ViewHolderProductBinding
 
 class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

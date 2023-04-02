@@ -3,6 +3,12 @@
 
     <style name="TextAppearance" parent="android:TextAppearance" />
 
+    <style name="TextAppearance.H1">
+        <item name="android:textSize">@dimen/text_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_h1_line</item>
+        <item name="android:textColor">@color/black_87pc</item>
+    </style>
+
     <style name="TextAppearance.Product" />
 
     <style name="TextAppearance.Product.H1">
@@ -31,6 +37,73 @@
     <style name="TextAppearance.Notice.H2">
         <item name="android:lineSpacingExtra">8dp</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Profile">
+
+    </style>
+
+    <style name="TextAppearance.Profile.H1">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineSpacingExtra">26sp</item>
+    </style>
+
+    <style name="TextAppearance.Profile.H2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.Profile.H3">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/silver_chalice</item>
+    </style>
+
+    <style name="Theme.MainProject.TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/seashell</item>
+        <item name="boxStrokeColor">@color/text_field_box_stroke_color</item>
+        <item name="shapeAppearance">@style/Theme.MainProject.TextInputLayout.ShapeAppearance</item>
+        <item name="hintTextAppearance">@style/Theme.MainProject.TextField.Hint</item>
+        <item name="android:textColorHint">@color/silver_chalice</item>
+        <item name="hintTextColor">@color/silver_chalice</item>
+        <item name="endIconTint">@color/black</item>
+    </style>
+
+    <style name="Theme.MainProject.TextInputLayout.ShapeAppearance">
+        <item name="cornerSize">@dimen/layout_text_border_radius</item>
+    </style>
+
+    <style name="Theme.MainProject.TextField" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_hint_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_hint_line</item>
+        <item name="android:textColor">@color/black_87pc</item>
+    </style>
+
+    <style name="Theme.MainProject.TextField.Hint" parent="TextAppearance.Material3.BodySmall">
+
+    </style>
+
+    <style name="Theme.MainProject.Button.SignIn" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="shapeAppearance">@style/Theme.MainProject.Button.SignIn.ShapeAppearance</item>
+        <item name="android:textAppearance">@style/Theme.MainProject.Button.TextAppearance</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.SignIn.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
+        <item name="cornerSize">@dimen/button_border_radius</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.TextAppearance" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_button_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_line</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.Profile" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="shapeAppearance">@style/Theme.MainProject.Button.Profile.ShapeAppearance</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.Profile.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
+        <item name="cornerSize">@dimen/button_border_radius_profile</item>
     </style>
 
     <style name="Theme.MainProject.CardView" parent="Widget.Material3.CardView.Filled">

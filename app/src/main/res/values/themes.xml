@@ -8,10 +8,12 @@
         <item name="colorPrimary">@color/smalt</item>
         <item name="colorSurface">@color/smalt</item>
         <item name="android:statusBarColor">@color/dark_smalt</item>
+        <item name="textInputStyle">@style/Theme.MainProject.TextInputLayout</item>
     </style>
 
     <style name="ThemeOverlay.Material3.Toolbar.Surface.Catalog">
         <item name="titleTextColor">@color/white</item>
+        <item name="navigationIconTint">@color/white</item>
     </style>
 
 </resources>

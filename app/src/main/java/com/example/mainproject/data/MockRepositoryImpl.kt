@@ -1,10 +1,12 @@
 package com.example.mainproject.data
 
-import com.example.mainproject.data.models.Product
+import com.example.mainproject.domain.repositories.MockRepository
+import com.example.mainproject.domain.models.Product
+import com.example.mainproject.domain.models.Profile
 import kotlinx.coroutines.delay
 import java.util.UUID
 
-class MockRepository {
+class MockRepositoryImpl : MockRepository {
 
     companion object {
         private val productIds = (0..6).map {
@@ -12,7 +14,13 @@ class MockRepository {
         }
     }
 
-    suspend fun getProducts(): Result<List<Product>> {
+    override suspend fun signIn(login: String, password: String): Result<String> {
+        val token = "AAAAAAAAAAAAAAAAAAAAAFnz2wAAAAAACOwLSPtVT5gxxxxxxxxxxxx"
+        randomDelay()
+        return Result.success(token)
+    }
+
+    override suspend fun getProducts(): Result<List<Product>> {
         randomDelay()
         return randomResult(
             listOf(
@@ -61,6 +69,19 @@ class MockRepository {
             ).drop((0..6).random())
         )
     }
+
+    override suspend fun getProfile(): Result<Profile> {
+        randomDelay()
+        return Result.success(
+            Profile(
+                "Олег",
+                "Виноградов",
+                "Разработчик",
+                "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+            )
+        )
+    }
+
 
     private suspend fun randomDelay() {
         delay((100L..1000L).random())

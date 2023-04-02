@@ -9,7 +9,7 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainproject.R
 
-class ProductItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
+class CatalogItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     private val divider = ContextCompat.getDrawable(context, R.drawable.divider_product)!!
     private val normalOffset = context.resources.getDimension(R.dimen.normal_100).toInt()

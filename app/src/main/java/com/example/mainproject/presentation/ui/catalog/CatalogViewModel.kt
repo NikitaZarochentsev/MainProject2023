@@ -1,17 +1,19 @@
-package com.example.mainproject.domain
+package com.example.mainproject.presentation.ui.catalog
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mainproject.data.MockRepository
-import com.example.mainproject.data.models.ProductListUiState
+import com.example.mainproject.domain.models.Product
+import com.example.mainproject.domain.usecases.GetProductsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class CatalogViewModel : ViewModel() {
+@HiltViewModel
+class CatalogViewModel @Inject constructor(val getProductsUseCase: GetProductsUseCase) :
+    ViewModel() {
 
     val productListUiState = MutableLiveData<Result<ProductListUiState>>()
-
-    private val mockRepository = MockRepository()
 
     private val handlerException = CoroutineExceptionHandler { _, throwable ->
         productListUiState.value = Result.failure(throwable)
@@ -20,7 +22,7 @@ class CatalogViewModel : ViewModel() {
     fun updateProductListUiState() {
         viewModelScope.launch(handlerException) {
             val productsResult = async {
-                mockRepository.getProducts()
+                getProductsUseCase.invoke()
             }
 
             productsResult.await()
@@ -35,3 +37,7 @@ class CatalogViewModel : ViewModel() {
         }
     }
 }
+
+data class ProductListUiState(
+    var productList: List<Product>
+)
