@@ -4,11 +4,11 @@ import com.example.mainproject.BuildConfig
 
 class GetVersionApplicationUseCase {
 
-    operator fun invoke(): String {
+    operator fun invoke(): Pair<String, String> {
 
-        val versionCode = BuildConfig.VERSION_CODE
         val versionName = BuildConfig.VERSION_NAME
+        val versionCode = BuildConfig.VERSION_CODE
 
-        return "Приложение $versionName ($versionCode)"
+        return Pair(versionName, versionCode.toString())
     }
 }

@@ -6,7 +6,6 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.commit
 import com.example.mainproject.R
 import com.example.mainproject.databinding.ActivityMainBinding
-import com.example.mainproject.presentation.ui.catalog.CatalogFragment
 import com.example.mainproject.presentation.ui.signin.SignInFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,8 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainerViewMain, SignInFragment())
+        with(supportFragmentManager) {
+            if (findFragmentById(R.id.fragmentContainerViewMain) == null) {
+                commit {
+                    add(R.id.fragmentContainerViewMain, SignInFragment())
+                }
+            }
         }
     }
 }

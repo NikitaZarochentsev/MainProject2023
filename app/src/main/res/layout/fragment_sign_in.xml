@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textTitleSignIn"
-        style="@style/TextAppearance.H1"
+        style="@style/TextAppearance.SignIn.H1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_200"
         android:hint="@string/sign_in_password_hint"
+        app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/progressButtonSignIn"
         app:layout_constraintEnd_toEndOf="parent"

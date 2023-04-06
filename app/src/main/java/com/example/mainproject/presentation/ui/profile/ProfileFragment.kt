@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
@@ -50,23 +53,50 @@ class ProfileFragment : Fragment() {
         }
 
         binding.buttonSignOutProfile.setOnClickListener {
-            parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            parentFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace(R.id.fragmentContainerViewMain, SignInFragment())
+            val signOutDialog = SignOutDialog {
+                viewModel.signOut()
             }
+            signOutDialog.show(parentFragmentManager, null)
+        }
+
+        val version = viewModel.getVersionApplication()
+        binding.textViewVersionProfile.text =
+            getString(R.string.text_application_version, version.first, version.second)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.textViewVersionProfile) { view, insets ->
+            val navigationBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(bottom = navigationBarInsets.bottom)
+            insets
         }
 
         viewModel.getProfile()
 
-        viewModel.profile.observe(this as LifecycleOwner) { profile ->
-            binding.imageViewProfile.load(profile.avatarUrl) {
-                transformations(CircleCropTransformation())
+        viewModel.profileUiState.observe(this as LifecycleOwner) { state ->
+            when (state) {
+                is ProfileUiState.Default -> {
+                    binding.imageViewProfile.load(state.profile.avatarUrl) {
+                        placeholder(R.drawable.ic_logo)
+                        error(R.drawable.ic_logo)
+                        transformations(CircleCropTransformation())
+                    }
+                    binding.textViewTitleProfile.text = getString(
+                        R.string.text_name_profile,
+                        state.profile.name,
+                        state.profile.surname
+                    )
+                    binding.textViewSubtitleProfile.text = state.profile.occupation
+                }
+                is ProfileUiState.Out -> {
+                    parentFragmentManager.popBackStack(
+                        null,
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
+                    parentFragmentManager.commit {
+                        setReorderingAllowed(true)
+                        replace(R.id.fragmentContainerViewMain, SignInFragment())
+                    }
+                }
             }
-            binding.textViewTitleProfile.text = "${profile.name} ${profile.surname}"
-            binding.textViewSubtitleProfile.text = profile.occupation
         }
-
-        binding.textViewVersionProfile.text = viewModel.getVersionApplication()
     }
 }

@@ -3,41 +3,41 @@ package com.example.mainproject.presentation.ui.catalog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mainproject.domain.models.Product
 import com.example.mainproject.domain.usecases.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
-class CatalogViewModel @Inject constructor(val getProductsUseCase: GetProductsUseCase) :
+class CatalogViewModel @Inject constructor(private val getProductsUseCase: GetProductsUseCase) :
     ViewModel() {
 
-    val productListUiState = MutableLiveData<Result<ProductListUiState>>()
+    val catalogUiState = MutableLiveData<CatalogUiState>()
 
     private val handlerException = CoroutineExceptionHandler { _, throwable ->
-        productListUiState.value = Result.failure(throwable)
+        catalogUiState.value = CatalogUiState.Error(throwable)
     }
 
-    fun updateProductListUiState() {
+    fun updateProductList() {
+        catalogUiState.value = CatalogUiState.Loading
         viewModelScope.launch(handlerException) {
             val productsResult = async {
                 getProductsUseCase.invoke()
             }
 
             productsResult.await()
-                .onSuccess {
+                .onSuccess { productList ->
                     withContext(Dispatchers.Main) {
-                        productListUiState.value = Result.success(ProductListUiState(it))
+                        if (productList.isEmpty()) {
+                            catalogUiState.value = CatalogUiState.Empty
+                        } else {
+                            catalogUiState.value = CatalogUiState.Default(productList)
+                        }
                     }
                 }
                 .onFailure {
-                    throw it
+                    catalogUiState.value = CatalogUiState.Error(it)
                 }
         }
     }
 }
-
-data class ProductListUiState(
-    var productList: List<Product>
-)

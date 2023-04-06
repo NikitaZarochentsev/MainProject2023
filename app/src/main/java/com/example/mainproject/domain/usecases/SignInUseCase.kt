@@ -4,14 +4,13 @@ import com.example.mainproject.domain.repositories.MockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlin.math.log
 
 class SignInUseCase(private val mockRepository: MockRepository) {
 
     class IllegalLoginException : Exception()
     class IllegalPasswordException : Exception()
 
-    suspend operator fun invoke(login: String, password: String): Result<String> {
+    suspend operator fun invoke(login: String, password: String): Result<Boolean> {
         if (!loginVerify(login)) {
             return Result.failure(IllegalLoginException())
         }
@@ -37,8 +36,7 @@ class SignInUseCase(private val mockRepository: MockRepository) {
     }
 
     private fun loginVerify(login: String): Boolean {
-        val emailRegex = "[A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z0-9]+"
-        return login.contains(emailRegex.toRegex())
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(login).matches()
     }
 
     private fun passwordVerify(password: String): Boolean {

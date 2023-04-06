@@ -4,28 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mainproject.R
-import com.example.mainproject.domain.models.Product
 import com.example.mainproject.databinding.FragmentCatalogBinding
-import com.example.mainproject.presentation.MainProjectApplication
-import com.example.mainproject.presentation.customviews.ProgressContainer
+import com.example.mainproject.presentation.ui.customviews.ProgressContainer
 import com.example.mainproject.presentation.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CatalogFragment : Fragment() {
 
     private lateinit var binding: FragmentCatalogBinding
-
     private val viewModel: CatalogViewModel by viewModels()
-
     private val productAdapter = ProductAdapter()
 
     override fun onCreateView(
@@ -54,44 +51,47 @@ class CatalogFragment : Fragment() {
             }
         }
 
-        binding.recyclerViewCatalog.adapter = productAdapter
-        binding.recyclerViewCatalog.layoutManager =
-            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewCatalog.addItemDecoration(CatalogItemDecoration(binding.recyclerViewCatalog.context))
-        showData(listOf())
+        initRecyclerView()
+        viewModel.updateProductList()
 
-        viewModel.productListUiState.observe(this as LifecycleOwner) { result ->
-            result
-                .onSuccess {
-                    showData(it.productList)
+        viewModel.catalogUiState.observe(this as LifecycleOwner) { state ->
+            when (state) {
+                is CatalogUiState.Default -> {
+                    binding.progressContainerCatalog.state = ProgressContainer.State.Success
+                    productAdapter.setProducts(state.productList)
                 }
-                .onFailure {
+                is CatalogUiState.Empty -> {
+                    binding.progressContainerCatalog.state = ProgressContainer.State.Notice(
+                        getString(R.string.progress_container_empty_title),
+                        getString(R.string.progress_container_empty_description)
+                    ) {
+                        viewModel.updateProductList()
+                    }
+                }
+                is CatalogUiState.Loading -> {
+                    binding.progressContainerCatalog.state = ProgressContainer.State.Loading
+                }
+                is CatalogUiState.Error -> {
                     binding.progressContainerCatalog.state = ProgressContainer.State.Notice(
                         getString(R.string.progress_container_error_title),
                         getString(R.string.progress_container_error_description)
                     ) {
-                        updateData()
+                        viewModel.updateProductList()
                     }
                 }
+            }
         }
     }
 
-    private fun updateData() {
-        binding.progressContainerCatalog.state = ProgressContainer.State.Loading
-        viewModel.updateProductListUiState()
-    }
-
-    private fun showData(data: List<Product>) {
-        if (data.isEmpty()) {
-            binding.progressContainerCatalog.state = ProgressContainer.State.Notice(
-                getString(R.string.progress_container_empty_title),
-                getString(R.string.progress_container_empty_description)
-            ) {
-                updateData()
-            }
-        } else {
-            binding.progressContainerCatalog.state = ProgressContainer.State.Success
-            productAdapter.setProducts(data)
+    private fun initRecyclerView() {
+        binding.recyclerViewCatalog.adapter = productAdapter
+        binding.recyclerViewCatalog.layoutManager =
+            LinearLayoutManager(requireView().context, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerViewCatalog.addItemDecoration(CatalogItemDecoration(binding.recyclerViewCatalog.context))
+        ViewCompat.setOnApplyWindowInsetsListener(binding.recyclerViewCatalog) { view, insets ->
+            val navigationBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(bottom = navigationBarInsets.bottom)
+            insets
         }
     }
 }

@@ -22,4 +22,21 @@
     <string name="progress_container_empty_description">Попробуйте обновить, вдруг товары появились</string>
     <string name="progress_container_error_title">Произошла непредвиденная ошибка</string>
     <string name="progress_container_error_description">Детальный текст ошибки, занимающий несколько строк</string>
+
+    <string name="text_application_version">Приложение %1$s (%2$s)</string>
+
+    <string name="text_regex_email">[A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z0-9]+</string>
+
+    <string name="text_name_profile">%1$s %2$s</string>
+
+    <string name="sign_out_dialog_title">Вы действительно хотите выйти?</string>
+    <string name="sign_out_dialog_positive">Выйти</string>
+    <string name="sign_out_dialog_negative">Отмена</string>
+
+    <string name="sign_in_input_error">Поле заполнено неверно</string>
+    <string name="sign_in_error">Непредвиденная ошибка</string>
+
+    <string name="profile_button_orders">Мои заказы</string>
+    <string name="profile_button_settings">Настройки</string>
+    <string name="profile_button_sign_out">Выйти</string>
 </resources>

@@ -3,115 +3,151 @@
 
     <style name="TextAppearance" parent="android:TextAppearance" />
 
-    <style name="TextAppearance.H1">
-        <item name="android:textSize">@dimen/text_h1_size</item>
-        <item name="android:lineSpacingExtra">@dimen/text_h1_line</item>
+    <style name="TextAppearance.SignIn" />
+
+    <style name="TextAppearance.SignIn.H1">
+        <item name="android:textSize">@dimen/text_sign_in_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_sign_in_h1_line</item>
         <item name="android:textColor">@color/black_87pc</item>
-    </style>
-
-    <style name="TextAppearance.Product" />
-
-    <style name="TextAppearance.Product.H1">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:lineSpacingExtra">4dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.Product.H2">
-        <item name="android:textColor">@color/silver_chalice</item>
-        <item name="android:lineSpacingExtra">8dp</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearance.Notice">
-        <item name="android:textColor">@color/silver_chalice</item>
-    </style>
-
-    <style name="TextAppearance.Notice.H1">
-        <item name="android:lineSpacingExtra">4dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.Notice.H2">
-        <item name="android:lineSpacingExtra">8dp</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearance.Profile">
-
-    </style>
-
-    <style name="TextAppearance.Profile.H1">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:lineSpacingExtra">26sp</item>
-    </style>
-
-    <style name="TextAppearance.Profile.H2">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="TextAppearance.Profile.H3">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/silver_chalice</item>
     </style>
 
     <style name="Theme.MainProject.TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@color/seashell</item>
         <item name="boxStrokeColor">@color/text_field_box_stroke_color</item>
         <item name="shapeAppearance">@style/Theme.MainProject.TextInputLayout.ShapeAppearance</item>
-        <item name="hintTextAppearance">@style/Theme.MainProject.TextField.Hint</item>
         <item name="android:textColorHint">@color/silver_chalice</item>
         <item name="hintTextColor">@color/silver_chalice</item>
         <item name="endIconTint">@color/black</item>
     </style>
 
     <style name="Theme.MainProject.TextInputLayout.ShapeAppearance">
-        <item name="cornerSize">@dimen/layout_text_border_radius</item>
+        <item name="cornerSize">@dimen/layout_input_border_radius</item>
     </style>
 
-    <style name="Theme.MainProject.TextField" parent="TextAppearance.Material3.BodyLarge">
-        <item name="android:textSize">@dimen/text_hint_size</item>
-        <item name="android:lineSpacingExtra">@dimen/text_hint_line</item>
-        <item name="android:textColor">@color/black_87pc</item>
+    <style name="Theme.MainProject.ProgressButton.SignIn" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="shapeAppearance">
+            @style/Theme.MainProject.ProgressButton.SignIn.ShapeAppearance
+        </item>
+        <item name="android:textAppearance">@style/TextAppearance.ProgressButton</item>
     </style>
 
-    <style name="Theme.MainProject.TextField.Hint" parent="TextAppearance.Material3.BodySmall">
-
+    <style name="Theme.MainProject.ProgressButton.SignIn.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
+        <item name="cornerSize">@dimen/progress_button_border_radius</item>
     </style>
 
-    <style name="Theme.MainProject.Button.SignIn" parent="Widget.Material3.Button.UnelevatedButton">
-        <item name="shapeAppearance">@style/Theme.MainProject.Button.SignIn.ShapeAppearance</item>
-        <item name="android:textAppearance">@style/Theme.MainProject.Button.TextAppearance</item>
-    </style>
-
-    <style name="Theme.MainProject.Button.SignIn.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
-        <item name="cornerSize">@dimen/button_border_radius</item>
-    </style>
-
-    <style name="Theme.MainProject.Button.TextAppearance" parent="TextAppearance.Material3.LabelLarge">
-        <item name="android:textSize">@dimen/text_button_size</item>
-        <item name="android:lineSpacingExtra">@dimen/text_button_line</item>
+    <style name="TextAppearance.ProgressButton" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_progress_button_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_progress_button_line</item>
         <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.ProgressContainer" />
+
+    <style name="TextAppearance.ProgressContainer.Notice">
+        <item name="android:textColor">@color/silver_chalice</item>
+    </style>
+
+    <style name="TextAppearance.ProgressContainer.Notice.H1">
+        <item name="android:textSize">@dimen/text_notice_progress_container_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_notice_progress_container_h1_line</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ProgressContainer.Notice.H2">
+        <item name="android:textSize">@dimen/text_notice_progress_container_h2_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_notice_progress_container_h2_line</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.ProgressContainer.Notice" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="shapeAppearance">
+            @style/Theme.MainProject.Button.ProgressContainer.Notice.ShapeAppearance
+        </item>
+        <item name="android:textAppearance">@style/TextAppearance.ProgressContainer.Notice.Button
+        </item>
+    </style>
+
+    <style name="Theme.MainProject.Button.ProgressContainer.Notice.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
+        <item name="cornerSize">@dimen/button_notice_progress_container_border_radius</item>
+    </style>
+
+    <style name="TextAppearance.ProgressContainer.Notice.Button">
+        <item name="android:textSize">@dimen/text_button_progress_container_notice_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_progress_container_notice_line
+        </item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.MainProject.CardView.Product" parent="Widget.Material3.CardView.Filled">
+        <item name="shapeAppearance">@style/Theme.MainProject.CardView.Product.ShapeAppearance
+        </item>
+    </style>
+
+    <style name="Theme.MainProject.CardView.Product.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">@dimen/card_view_product_border_radius</item>
+    </style>
+
+    <style name="TextAppearance.Product" />
+
+    <style name="TextAppearance.Product.H1">
+        <item name="android:textSize">@dimen/text_product_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h1_line</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Product.H2">
+        <item name="android:textSize">@dimen/text_product_h2_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h2_line</item>
+        <item name="android:textColor">@color/silver_chalice</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.Product" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:textAppearance">@style/TextAppearance.Product.Button</item>
+    </style>
+
+    <style name="TextAppearance.Product.Button">
+        <item name="android:textSize">@dimen/text_button_product_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_product_line</item>
+        <item name="android:textColor">@color/smalt</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Profile">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.Profile.H1">
+        <item name="android:textSize">@dimen/text_profile_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_profile_h1_line</item>
+    </style>
+
+    <style name="TextAppearance.Profile.H2">
+        <item name="android:textSize">@dimen/text_profile_h2_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h2_line</item>
+    </style>
+
+    <style name="TextAppearance.Profile.H3">
+        <item name="android:textSize">@dimen/text_profile_h3_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_profile_h3_line</item>
+        <item name="android:textColor">@color/silver_chalice</item>
     </style>
 
     <style name="Theme.MainProject.Button.Profile" parent="Widget.Material3.Button.ElevatedButton.Icon">
         <item name="shapeAppearance">@style/Theme.MainProject.Button.Profile.ShapeAppearance</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/normal_50</item>
+        <item name="android:paddingEnd">@dimen/normal_50</item>
+        <item name="android:paddingTop">@dimen/normal_175</item>
+        <item name="android:paddingBottom">@dimen/normal_175</item>
+        <item name="iconGravity">top</item>
+        <item name="iconPadding">@dimen/button_profile_icon_padding</item>
+        <item name="iconSize">@dimen/icon_button_profile_size</item>
     </style>
 
     <style name="Theme.MainProject.Button.Profile.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
-        <item name="cornerSize">@dimen/button_border_radius_profile</item>
-    </style>
-
-    <style name="Theme.MainProject.CardView" parent="Widget.Material3.CardView.Filled">
-        <item name="shapeAppearance">@style/Theme.MainProject.CardView.ShapeAppearance</item>
-    </style>
-
-    <style name="Theme.MainProject.CardView.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium">
-        <item name="cornerSize">0dp</item>
+        <item name="cornerSize">@dimen/button_profile_border_radius</item>
     </style>
 
 </resources>

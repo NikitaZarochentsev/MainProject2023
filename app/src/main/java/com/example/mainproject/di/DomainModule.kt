@@ -32,7 +32,7 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSignOutUseCase(): SignOutUseCase {
-        return SignOutUseCase()
+    fun provideSignOutUseCase(mockRepository: MockRepository): SignOutUseCase {
+        return SignOutUseCase(mockRepository)
     }
 }

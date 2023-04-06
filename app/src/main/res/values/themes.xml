@@ -7,7 +7,7 @@
     <style name="Theme.MainProject" parent="Base.V27.Theme">
         <item name="colorPrimary">@color/smalt</item>
         <item name="colorSurface">@color/smalt</item>
-        <item name="android:statusBarColor">@color/dark_smalt</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="textInputStyle">@style/Theme.MainProject.TextInputLayout</item>
     </style>
 

@@ -14,10 +14,12 @@ class MockRepositoryImpl : MockRepository {
         }
     }
 
-    override suspend fun signIn(login: String, password: String): Result<String> {
-        val token = "AAAAAAAAAAAAAAAAAAAAAFnz2wAAAAAACOwLSPtVT5gxxxxxxxxxxxx"
+    private lateinit var token: String
+
+    override suspend fun signIn(login: String, password: String): Result<Boolean> {
         randomDelay()
-        return Result.success(token)
+        token = "AAAAAAAAAAAAAAAAAAAAAFnz2wAAAAAACOwLSPtVT5gxxxxxxxxxxxx"
+        return Result.success(true)
     }
 
     override suspend fun getProducts(): Result<List<Product>> {
@@ -80,6 +82,10 @@ class MockRepositoryImpl : MockRepository {
                 "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
             )
         )
+    }
+
+    override fun signOut() {
+        token = ""
     }
 
 

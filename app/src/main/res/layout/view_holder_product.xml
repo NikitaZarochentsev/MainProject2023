@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.MainProject.CardView"
+    style="@style/Theme.MainProject.CardView.Product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -23,12 +22,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/normal_100"
+            android:importantForAccessibility="no"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@+id/guideLineVerticalProduct"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewHeaderProduct"
@@ -41,8 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideLineVerticalProduct"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            tools:text="Название" />
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/textViewDescriptionProduct"
@@ -54,8 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideLineVerticalProduct"
             app:layout_constraintTop_toBottomOf="@+id/textViewHeaderProduct"
-            app:layout_constraintVertical_bias="0"
-            tools:text="Описание" />
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/textViewCostProduct"
@@ -67,12 +64,11 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/guideLineVerticalProduct"
             app:layout_constraintTop_toTopOf="@+id/buttonBuyProduct"
-            app:layout_constraintVertical_bias="0.5"
-            tools:text="1000 ₽" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/buttonBuyProduct"
-            style="@style/Widget.Material3.Button.TextButton.Icon"
+            style="@style/Theme.MainProject.Button.Product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/buy_text"

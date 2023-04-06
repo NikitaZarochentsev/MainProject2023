@@ -42,10 +42,6 @@ class ProgressButton @JvmOverloads constructor(
         }
     }
 
-    fun setText(resId: Int) {
-        binding.button.setText(resId)
-    }
-
     override fun setOnClickListener(l: OnClickListener?) {
         binding.button.setOnClickListener(l)
     }

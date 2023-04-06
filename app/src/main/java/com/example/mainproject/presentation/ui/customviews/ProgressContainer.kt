@@ -1,4 +1,4 @@
-package com.example.mainproject.presentation.customviews
+package com.example.mainproject.presentation.ui.customviews
 
 import android.content.Context
 import android.util.AttributeSet

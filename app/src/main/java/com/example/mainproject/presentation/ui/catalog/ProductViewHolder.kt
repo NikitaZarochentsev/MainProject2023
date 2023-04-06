@@ -21,13 +21,9 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.imageViewProduct.load(product.iconURL) {
             transformations(
                 RoundedCornersTransformation(
-                    itemView.resources.getDimension(R.dimen.image_view_product_border_radius)
+                    itemView.resources.getDimension(R.dimen.image_product_border_radius)
                 )
             )
-        }
-
-        itemView.setOnClickListener {
-            Toast.makeText(itemView.context, product.name, Toast.LENGTH_SHORT).show()
         }
 
         binding.buttonBuyProduct.setOnClickListener {
@@ -36,6 +32,10 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 itemView.resources.getString(R.string.cost_rubles, product.cost.toString()),
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+        itemView.setOnClickListener {
+            Toast.makeText(itemView.context, product.name, Toast.LENGTH_SHORT).show()
         }
     }
 }

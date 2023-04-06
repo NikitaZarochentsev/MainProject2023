@@ -14,12 +14,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(private val signInUseCase: SignInUseCase) : ViewModel() {
 
-    val signInUiState = MutableLiveData<SignInState>()
-
-    val token = MutableLiveData<String>()
+    val signInUiState = MutableLiveData<SignInUiState>()
 
     fun signIn(login: String, password: String) {
-        signInUiState.value = SignInState.Loading
+        signInUiState.value = SignInUiState.Loading
 
         viewModelScope.launch {
             val signInResult = async {
@@ -29,25 +27,18 @@ class SignInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
             signInResult.await()
                 .onSuccess {
                     withContext(Dispatchers.Main) {
-                        token.value = it
+                        signInUiState.value = SignInUiState.Success
                     }
                 }
                 .onFailure {
                     when (it) {
                         is SignInUseCase.IllegalLoginException -> signInUiState.value =
-                            SignInState.LoginError
+                            SignInUiState.LoginError
                         is SignInUseCase.IllegalPasswordException -> signInUiState.value =
-                            SignInState.PasswordError
-                        else -> signInUiState.value = SignInState.Error
+                            SignInUiState.PasswordError
+                        else -> signInUiState.value = SignInUiState.Error
                     }
                 }
         }
     }
-}
-
-sealed class SignInState {
-    object Loading : SignInState()
-    object LoginError : SignInState()
-    object PasswordError : SignInState()
-    object Error : SignInState()
 }

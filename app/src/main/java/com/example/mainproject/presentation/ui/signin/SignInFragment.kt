@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import com.example.mainproject.R
 import com.example.mainproject.databinding.FragmentSignInBinding
 import com.example.mainproject.presentation.ui.catalog.CatalogFragment
@@ -39,33 +38,31 @@ class SignInFragment : Fragment() {
 
         viewModel.signInUiState.observe(this as LifecycleOwner) { state ->
             when (state) {
-                SignInState.Loading -> {
+                SignInUiState.Loading -> {
                     binding.progressButtonSignIn.isLoading = true
                     binding.layoutLoginSignIn.error = null
                     binding.layoutPasswordSignIn.error = null
                 }
-                SignInState.LoginError -> {
+                SignInUiState.LoginError -> {
                     binding.progressButtonSignIn.isLoading = false
-                    binding.layoutLoginSignIn.error = "Поле заполнено неверно"
+                    binding.layoutLoginSignIn.error = getString(R.string.sign_in_input_error)
                 }
-                SignInState.PasswordError -> {
+                SignInUiState.PasswordError -> {
                     binding.progressButtonSignIn.isLoading = false
-                    binding.layoutPasswordSignIn.error = "Поле заполнено неверно"
+                    binding.layoutPasswordSignIn.error = getString(R.string.sign_in_input_error)
                 }
-                SignInState.Error -> {
+                SignInUiState.Error -> {
                     binding.progressButtonSignIn.isLoading = false
-                    Toast.makeText(view.context, "Непредвиденная ошибка", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(view.context, R.string.sign_in_error, Toast.LENGTH_SHORT).show()
                 }
-            }
-        }
-
-        viewModel.token.observe(this as LifecycleOwner) {
-            lifecycle.coroutineScope.launch {
-                delay(3000)
-                withContext(Dispatchers.Main) {
-                    parentFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace(R.id.fragmentContainerViewMain, CatalogFragment())
+                SignInUiState.Success -> {
+                    lifecycle.coroutineScope.launch {
+                        withContext(Dispatchers.Main) {
+                            parentFragmentManager.commit {
+                                setReorderingAllowed(true)
+                                replace(R.id.fragmentContainerViewMain, CatalogFragment())
+                            }
+                        }
                     }
                 }
             }
@@ -74,6 +71,7 @@ class SignInFragment : Fragment() {
         binding.progressButtonSignIn.setOnClickListener {
             navigateToCatalog()
         }
+
         binding.textPasswordSignIn.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE ||
                 event.action == KeyEvent.ACTION_DOWN &&
