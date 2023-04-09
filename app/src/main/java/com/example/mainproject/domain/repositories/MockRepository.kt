@@ -11,4 +11,6 @@ interface MockRepository {
     suspend fun getProfile(): Result<Profile>
 
     fun signOut()
+
+    suspend fun getProduct(productId: String): Result<Product>
 }

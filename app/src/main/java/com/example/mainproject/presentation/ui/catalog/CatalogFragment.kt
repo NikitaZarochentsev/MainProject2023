@@ -1,5 +1,6 @@
 package com.example.mainproject.presentation.ui.catalog
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -23,7 +25,12 @@ class CatalogFragment : Fragment() {
 
     private lateinit var binding: FragmentCatalogBinding
     private val viewModel: CatalogViewModel by viewModels()
-    private val productAdapter = ProductAdapter()
+    private lateinit var productAdapter: ProductAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        productAdapter = ProductAdapter(parentFragmentManager)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

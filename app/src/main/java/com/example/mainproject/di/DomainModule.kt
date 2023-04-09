@@ -35,4 +35,9 @@ class DomainModule {
     fun provideSignOutUseCase(mockRepository: MockRepository): SignOutUseCase {
         return SignOutUseCase(mockRepository)
     }
+
+    @Provides
+    fun provideGetProductUseCase(mockRepository: MockRepository): GetProductUseCase {
+        return GetProductUseCase(mockRepository)
+    }
 }

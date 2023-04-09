@@ -56,4 +56,10 @@
     <dimen name="button_profile_border_radius">16dp</dimen>
     <dimen name="button_profile_icon_padding">0dp</dimen>
     <dimen name="icon_button_profile_size">24dp</dimen>
+
+    <dimen name="view_pager_product_height">284dp</dimen>
+    <dimen name="image_view_pager_product_border_radius">16dp</dimen>
+
+    <dimen name="image_view_holder_product_preview_size">32dp</dimen>
+    <dimen name="image_view_holder_product_preview_border_radius">4dp</dimen>
 </resources>

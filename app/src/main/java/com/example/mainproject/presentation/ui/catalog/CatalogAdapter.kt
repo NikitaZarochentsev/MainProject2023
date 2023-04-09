@@ -2,12 +2,13 @@ package com.example.mainproject.presentation.ui.catalog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainproject.R
 import com.example.mainproject.domain.models.Product
 
-class ProductAdapter :
+class ProductAdapter(private val parentFragmentManager: FragmentManager) :
     RecyclerView.Adapter<ProductViewHolder>() {
 
     private var productsList = listOf<Product>()
@@ -27,7 +28,7 @@ class ProductAdapter :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(productsList[position])
+        holder.bind(productsList[position], parentFragmentManager)
     }
 
     fun setProducts(productsList: List<Product>) {
