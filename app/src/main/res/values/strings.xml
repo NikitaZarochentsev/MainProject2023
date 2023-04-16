@@ -23,6 +23,10 @@
     <string name="progress_container_error_title">Произошла непредвиденная ошибка</string>
     <string name="progress_container_error_description">Детальный текст ошибки, занимающий несколько строк</string>
 
+    <string name="size_hint">Размер</string>
+
+    <string name="buy_now_text">Купить сейчас</string>
+
     <string name="text_application_version">Приложение %1$s (%2$s)</string>
 
     <string name="text_regex_email">[A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z0-9]+</string>
@@ -39,4 +43,23 @@
     <string name="profile_button_orders">Мои заказы</string>
     <string name="profile_button_settings">Настройки</string>
     <string name="profile_button_sign_out">Выйти</string>
+
+    <string name="orders_toolbar_title">@string/profile_button_orders</string>
+
+    <string name="text_tab_all">Все %1$d</string>
+    <string name="text_tab_active">Активные %1$d</string>
+
+    <string name="item_orders_header">Заказ №%1$d от %2$s</string>
+    <string name="date_order_header_format">dd.MM.uu kk:mm</string>
+
+    <string name="item_orders_in_work">В работе</string>
+    <string name="item_orders_canceled">Отменен</string>
+    <string name="item_orders_done">Доставлен</string>
+
+    <string name="item_orders_title">%1$d × %2$s • %3$s</string>
+    <string name="item_orders_delivery_information">Дата доставки: %1$s\nАдрес доставки: %2$s</string>
+    <string name="item_orders_cancellation_information">Был отменен %1$s</string>
+    <string name="item_orders_done_information">Был доставлен %1$s</string>
+
+    <string name="item_orders_cancel">Отменить</string>
 </resources>

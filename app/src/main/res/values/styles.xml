@@ -78,39 +78,129 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="Theme.MainProject.CardView.Product" parent="Widget.Material3.CardView.Filled">
-        <item name="shapeAppearance">@style/Theme.MainProject.CardView.Product.ShapeAppearance
+    <style name="Theme.MainProject.CardView.ItemCatalog" parent="Widget.Material3.CardView.Filled">
+        <item name="shapeAppearance">@style/Theme.MainProject.CardView.ItemCatalog.ShapeAppearance
         </item>
     </style>
 
-    <style name="Theme.MainProject.CardView.Product.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium">
+    <style name="Theme.MainProject.CardView.ItemCatalog.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium">
         <item name="cornerSize">@dimen/card_view_product_border_radius</item>
     </style>
 
-    <style name="TextAppearance.Product" />
+    <style name="TextAppearance.ItemCatalog" />
+
+    <style name="TextAppearance.ItemCatalog.H1">
+        <item name="android:textSize">@dimen/text_item_catalog_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_catalog_h1_line</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ItemCatalog.H2">
+        <item name="android:textSize">@dimen/text_item_catalog_h2_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_catalog_h2_line</item>
+        <item name="android:textColor">@color/silver_chalice</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.ItemCatalog" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:textAppearance">@style/TextAppearance.ItemCatalog.Button</item>
+    </style>
+
+    <style name="TextAppearance.ItemCatalog.Button">
+        <item name="android:textSize">@dimen/text_button_item_catalog_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_item_catalog_line</item>
+        <item name="android:textColor">@color/smalt</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Product">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="TextAppearance.Product.H1">
         <item name="android:textSize">@dimen/text_product_h1_size</item>
         <item name="android:lineSpacingExtra">@dimen/text_product_h1_line</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Product.Badge">
+        <item name="android:textSize">@dimen/text_badge_product_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_badge_product_line</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextAppearance.Product.H2">
         <item name="android:textSize">@dimen/text_product_h2_size</item>
         <item name="android:lineSpacingExtra">@dimen/text_product_h2_line</item>
+    </style>
+
+    <style name="TextAppearance.Product.H3">
+        <item name="android:textSize">@dimen/text_product_h3_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h3_line</item>
+        <item name="android:textColor">@color/silver_chalice</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.MainProject.BottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Theme.MainProject.BottomSheetDialog.Modal</item>
+    </style>
+
+    <style name="Theme.MainProject.BottomSheetDialog.Modal" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:background">@drawable/bottom_size_background</item>
+        <item name="shapeAppearance">
+            @style/Theme.MainProject.BottomSheetDialog.ShapeAppearance
+        </item>
+    </style>
+
+    <style name="Theme.MainProject.BottomSheetDialog.ShapeAppearance" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+    </style>
+
+    <style name="Theme.MainProject.BottomSheetDialog.Button" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">@style/TextAppearance.BottomSheetDialog</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="shapeAppearance">
+            @style/Theme.MainProject.BottomSheetDialog.Button.ShapeAppearance
+        </item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="TextAppearance.BottomSheetDialog">
+        <item name="android:textSize">@dimen/text_size_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_size_line</item>
+    </style>
+
+    <style name="Theme.MainProject.BottomSheetDialog.Button.ShapeAppearance" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">@dimen/button_size_border_radius</item>
+    </style>
+
+    <style name="TextAppearance.Product.H4">
+        <item name="android:textSize">@dimen/text_product_h4_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h4_line</item>
+    </style>
+
+    <style name="TextAppearance.Product.H5">
+        <item name="android:textSize">@dimen/text_product_h5_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_product_h5_line</item>
         <item name="android:textColor">@color/silver_chalice</item>
     </style>
 
-    <style name="Theme.MainProject.Button.Product" parent="Widget.Material3.Button.TextButton.Icon">
-        <item name="android:textAppearance">@style/TextAppearance.Product.Button</item>
+    <style name="Theme.MainProject.Button.Product" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="shapeAppearance">
+            @style/Theme.MainProject.Button.Product.ShapeAppearance
+        </item>
+        <item name="android:textAppearance">@style/TextAppearance.ProgressButton</item>
     </style>
 
-    <style name="TextAppearance.Product.Button">
+    <style name="Theme.MainProject.Button.Product.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
+        <item name="cornerSize">@dimen/button_product_border_radius</item>
+    </style>
+
+    <style name="TextAppearance.Button.Product" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:textSize">@dimen/text_button_product_size</item>
         <item name="android:lineSpacingExtra">@dimen/text_button_product_line</item>
-        <item name="android:textColor">@color/smalt</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="textAllCaps">true</item>
     </style>
 
     <style name="TextAppearance.Profile">
@@ -124,7 +214,7 @@
 
     <style name="TextAppearance.Profile.H2">
         <item name="android:textSize">@dimen/text_profile_h2_size</item>
-        <item name="android:lineSpacingExtra">@dimen/text_product_h2_line</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_catalog_h2_line</item>
     </style>
 
     <style name="TextAppearance.Profile.H3">
@@ -148,6 +238,32 @@
 
     <style name="Theme.MainProject.Button.Profile.ShapeAppearance" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full">
         <item name="cornerSize">@dimen/button_profile_border_radius</item>
+    </style>
+
+    <style name="TextAppearance.ItemOrders">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.ItemOrders.H3">
+        <item name="android:textSize">@dimen/text_item_orders_h3_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_orders_h3_line</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.ItemOrders.H1">
+        <item name="android:textSize">@dimen/text_item_orders_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_orders_h1_line</item>
+    </style>
+
+    <style name="TextAppearance.ItemOrders.H2">
+        <item name="android:textSize">@dimen/text_item_orders_h2_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_orders_h2_line</item>
+    </style>
+
+    <style name="TextAppearance.ItemOrders.H4">
+        <item name="android:textSize">@dimen/text_item_orders_h4_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_item_orders_h4_line</item>
+        <item name="android:textColor">@color/silver_chalice</item>
     </style>
 
 </resources>

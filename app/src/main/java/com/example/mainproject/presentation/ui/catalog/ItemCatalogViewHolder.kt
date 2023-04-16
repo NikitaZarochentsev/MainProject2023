@@ -9,19 +9,19 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.mainproject.R
 import com.example.mainproject.domain.models.Product
-import com.example.mainproject.databinding.ViewHolderProductBinding
+import com.example.mainproject.databinding.ViewHolderItemCatalogBinding
 import com.example.mainproject.presentation.ui.product.ProductFragment
 
-class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ItemCatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val binding = ViewHolderProductBinding.bind(itemView)
+    private val binding = ViewHolderItemCatalogBinding.bind(itemView)
 
     fun bind(product: Product, parentFragmentManager: FragmentManager) {
-        binding.textViewHeaderProduct.text = product.name
-        binding.textViewDescriptionProduct.text = product.description
-        binding.textViewCostProduct.text =
-            itemView.resources.getString(R.string.cost_rubles, product.cost.toString())
-        binding.imageViewProduct.load(product.iconURL) {
+        binding.textViewHeaderItemCatalog.text = product.title
+        binding.textViewDescriptionItemCatalog.text = product.department
+        binding.textViewCostItemCatalog.text =
+            itemView.resources.getString(R.string.cost_rubles, product.price.toString())
+        binding.imageViewItemCatalog.load(product.preview) {
             transformations(
                 RoundedCornersTransformation(
                     itemView.resources.getDimension(R.dimen.image_product_border_radius)
@@ -29,10 +29,10 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             )
         }
 
-        binding.buttonBuyProduct.setOnClickListener {
+        binding.buttonBuyItemCatalog.setOnClickListener {
             Toast.makeText(
                 itemView.context,
-                itemView.resources.getString(R.string.cost_rubles, product.cost.toString()),
+                itemView.resources.getString(R.string.cost_rubles, product.price.toString()),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -42,7 +42,7 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 setReorderingAllowed(true)
                 replace(
                     R.id.fragmentContainerViewMain,
-                    ProductFragment.newInstance(product.productId)
+                    ProductFragment.newInstance(product.id)
                 )
                 addToBackStack(null)
             }

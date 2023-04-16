@@ -6,5 +6,5 @@ sealed class CatalogUiState {
     object Loading : CatalogUiState()
     object Empty : CatalogUiState()
     data class Error(val throwable: Throwable) : CatalogUiState()
-    data class Default(val productList: List<Product>) : CatalogUiState()
+    data class Default(val products: List<Product>) : CatalogUiState()
 }

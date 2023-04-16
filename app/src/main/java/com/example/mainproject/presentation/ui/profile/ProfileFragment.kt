@@ -17,6 +17,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.mainproject.R
 import com.example.mainproject.databinding.FragmentProfileBinding
+import com.example.mainproject.presentation.ui.orders.OrdersFragment
 import com.example.mainproject.presentation.ui.signin.SignInFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,8 +44,11 @@ class ProfileFragment : Fragment() {
         }
 
         binding.buttonOrdersProfile.setOnClickListener {
-            Toast.makeText(view.context, binding.buttonOrdersProfile.text, Toast.LENGTH_SHORT)
-                .show()
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerViewMain, OrdersFragment())
+                addToBackStack(null)
+            }
         }
 
         binding.buttonSettingsProfile.setOnClickListener {

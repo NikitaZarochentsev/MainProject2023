@@ -9,7 +9,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -25,11 +24,11 @@ class CatalogFragment : Fragment() {
 
     private lateinit var binding: FragmentCatalogBinding
     private val viewModel: CatalogViewModel by viewModels()
-    private lateinit var productAdapter: ProductAdapter
+    private lateinit var catalogAdapter: CatalogAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        productAdapter = ProductAdapter(parentFragmentManager)
+        catalogAdapter = CatalogAdapter(parentFragmentManager)
     }
 
     override fun onCreateView(
@@ -65,7 +64,7 @@ class CatalogFragment : Fragment() {
             when (state) {
                 is CatalogUiState.Default -> {
                     binding.progressContainerCatalog.state = ProgressContainer.State.Success
-                    productAdapter.setProducts(state.productList)
+                    catalogAdapter.setProducts(state.products)
                 }
                 is CatalogUiState.Empty -> {
                     binding.progressContainerCatalog.state = ProgressContainer.State.Notice(
@@ -91,7 +90,7 @@ class CatalogFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.recyclerViewCatalog.adapter = productAdapter
+        binding.recyclerViewCatalog.adapter = catalogAdapter
         binding.recyclerViewCatalog.layoutManager =
             LinearLayoutManager(requireView().context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewCatalog.addItemDecoration(CatalogItemDecoration(binding.recyclerViewCatalog.context))

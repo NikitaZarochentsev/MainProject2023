@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mainproject.R
 import com.example.mainproject.domain.models.Product
 
-class ProductAdapter(private val parentFragmentManager: FragmentManager) :
-    RecyclerView.Adapter<ProductViewHolder>() {
+class CatalogAdapter(private val parentFragmentManager: FragmentManager) :
+    RecyclerView.Adapter<ItemCatalogViewHolder>() {
 
-    private var productsList = listOf<Product>()
+    private var products = listOf<Product>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCatalogViewHolder {
+        return ItemCatalogViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.view_holder_product,
+                R.layout.view_holder_item_catalog,
                 parent,
                 false
             )
@@ -24,17 +24,17 @@ class ProductAdapter(private val parentFragmentManager: FragmentManager) :
     }
 
     override fun getItemCount(): Int {
-        return productsList.size
+        return products.size
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(productsList[position], parentFragmentManager)
+    override fun onBindViewHolder(holder: ItemCatalogViewHolder, position: Int) {
+        holder.bind(products[position], parentFragmentManager)
     }
 
-    fun setProducts(productsList: List<Product>) {
-        val productDiffCallback = ProductDiffCallback(this.productsList, productsList)
-        val diffResult = DiffUtil.calculateDiff(productDiffCallback)
-        this.productsList = productsList
+    fun setProducts(products: List<Product>) {
+        val itemCatalogDiffCallback = ItemCatalogDiffCallback(this.products, products)
+        val diffResult = DiffUtil.calculateDiff(itemCatalogDiffCallback)
+        this.products = products
         diffResult.dispatchUpdatesTo(this)
     }
 }

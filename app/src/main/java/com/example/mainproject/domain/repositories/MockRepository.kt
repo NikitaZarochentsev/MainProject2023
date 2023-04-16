@@ -1,5 +1,6 @@
 package com.example.mainproject.domain.repositories
 
+import com.example.mainproject.domain.models.Order
 import com.example.mainproject.domain.models.Product
 import com.example.mainproject.domain.models.Profile
 
@@ -13,4 +14,6 @@ interface MockRepository {
     fun signOut()
 
     suspend fun getProduct(productId: String): Result<Product>
+
+    suspend fun getOrders(): Result<List<Order>>
 }

@@ -17,8 +17,6 @@ class SignOutDialog(private val onButtonClicked: () -> Unit) : DialogFragment() 
             .create()
 
         alertDialog.show()
-//        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-//            .setTextColor(ContextCompat.getColor(alertDialog.context, R.color.dark_gray))
 
         return alertDialog
     }

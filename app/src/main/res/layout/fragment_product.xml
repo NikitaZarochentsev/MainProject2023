@@ -20,114 +20,153 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <com.example.mainproject.presentation.ui.customviews.ProgressContainer
+        android:id="@+id/progressContainerProduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:fillViewport="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPagerIconsProduct"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutProduct"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_pager_product_height"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/normal_100">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewPreviewProduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPagerIconsProduct" />
-
-            <TextView
-                android:id="@+id/textViewCost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9000"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewPreviewProduct" />
-
-            <TextView
-                android:id="@+id/textViewBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Хит сезона"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclerViewPreviewProduct" />
-
-            <TextView
-                android:id="@+id/textViewTitleProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Название товара"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCost" />
-
-            <TextView
-                android:id="@+id/textViewDepartmentProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Джерси"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitleProduct" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutSizeProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Размер"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDepartmentProduct">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textSizeProduct"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPagerIconsProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="@dimen/view_pager_product_height"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPreviewProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPagerIconsProduct" />
 
-            <TextView
-                android:id="@+id/textViewDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Описание товара"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutSizeProduct" />
+                <TextView
+                    android:id="@+id/textViewCostProduct"
+                    style="@style/TextAppearance.Product.H1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/textViewBadgeProduct"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerViewPreviewProduct" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewDetailsProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+                <TextView
+                    android:id="@+id/textViewBadgeProduct"
+                    style="@style/TextAppearance.Product.Badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_view_badge_background"
+                    android:paddingHorizontal="@dimen/badge_padding_horizontal"
+                    android:paddingVertical="@dimen/badge_padding_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toEndOf="@+id/textViewCostProduct"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewPreviewProduct" />
 
-            <Button
-                android:id="@+id/buttonBuy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Купить сейчас"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewDetailsProduct" />
+                <TextView
+                    android:id="@+id/textViewTitleProduct"
+                    style="@style/TextAppearance.Product.H2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCostProduct" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textViewDepartmentProduct"
+                    style="@style/TextAppearance.Product.H3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleProduct" />
 
-    </androidx.core.widget.NestedScrollView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutSizeProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_100"
+                    android:hint="@string/size_hint"
+                    app:endIconDrawable="@drawable/ic_chevron_right"
+                    app:endIconMode="custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDepartmentProduct">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textSizeProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewDescriptionProduct"
+                    style="@style/TextAppearance.Product.H4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSizeProduct"
+                    app:layout_goneMarginTop="@dimen/normal_100" />
+
+                <ImageView
+                    android:id="@+id/imageViewDividerProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_100"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/divider_product"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewDescriptionProduct" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDetailsProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewDividerProduct" />
+
+                <Button
+                    android:id="@+id/buttonBuy"
+                    style="@style/Theme.MainProject.Button.Product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal_200"
+                    android:layout_marginBottom="@dimen/normal_100"
+                    android:text="@string/buy_now_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerViewDetailsProduct" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.example.mainproject.presentation.ui.customviews.ProgressContainer>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

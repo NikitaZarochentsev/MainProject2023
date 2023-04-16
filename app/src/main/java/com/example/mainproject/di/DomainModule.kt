@@ -40,4 +40,9 @@ class DomainModule {
     fun provideGetProductUseCase(mockRepository: MockRepository): GetProductUseCase {
         return GetProductUseCase(mockRepository)
     }
+
+    @Provides
+    fun provideGetOrdersUseCase(mockRepository: MockRepository): GetOrdersUseCase {
+        return GetOrdersUseCase(mockRepository)
+    }
 }

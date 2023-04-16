@@ -3,8 +3,10 @@ package com.example.mainproject.presentation.ui.catalog
 import androidx.recyclerview.widget.DiffUtil
 import com.example.mainproject.domain.models.Product
 
-class ProductDiffCallback(private val oldList: List<Product>, private val newList: List<Product>) :
-    DiffUtil.Callback() {
+class ItemCatalogDiffCallback(
+    private val oldList: List<Product>,
+    private val newList: List<Product>,
+) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
@@ -12,7 +14,7 @@ class ProductDiffCallback(private val oldList: List<Product>, private val newLis
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldProduct = oldList[oldItemPosition]
         val newProduct = newList[newItemPosition]
-        return oldProduct.productId == newProduct.productId
+        return oldProduct.id == newProduct.id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
