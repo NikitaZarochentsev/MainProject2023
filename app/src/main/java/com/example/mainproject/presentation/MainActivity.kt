@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         with(supportFragmentManager) {
             if (findFragmentById(R.id.fragmentContainerViewMain) == null) {
                 commit {
+                    setReorderingAllowed(true)
                     add(R.id.fragmentContainerViewMain, SignInFragment())
                 }
             }

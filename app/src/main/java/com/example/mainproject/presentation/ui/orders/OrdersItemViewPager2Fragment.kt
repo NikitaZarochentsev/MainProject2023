@@ -1,5 +1,6 @@
 package com.example.mainproject.presentation.ui.orders
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,9 @@ class OrdersItemViewPager2Fragment : Fragment() {
 
     private lateinit var binding: FragmentItemViewPager2OrdersBinding
     private val viewModel: OrdersItemViewModel by viewModels()
-    private val orderAdapter = OrderAdapter()
+    private lateinit var orderAdapter: OrderAdapter
+    private var type = ALL_TYPE
+    private lateinit var onSizeChange: (sizeCurrent: Int) -> Unit
 
     companion object {
         const val ALL_TYPE = "TYPE_ALL"
@@ -35,6 +38,21 @@ class OrdersItemViewPager2Fragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updateOrdersList(type)
+    }
+
+    fun initAdapter() {
+        type = requireArguments().getString(TYPE_ARGUMENT, ALL_TYPE)
+        orderAdapter = OrderAdapter()
+        orderAdapter.setTypeOrders(type)
+    }
+
+    fun setSizeChangeListener(onSizeChange: (size: Int) -> Unit) {
+        this.onSizeChange = onSizeChange
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +60,11 @@ class OrdersItemViewPager2Fragment : Fragment() {
     ): View {
         binding = FragmentItemViewPager2OrdersBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateOrdersList(type)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,15 +75,16 @@ class OrdersItemViewPager2Fragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewItemViewPager2Orders.addItemDecoration(ProductPreviewItemDecoration())
 
-        val type = requireArguments().getString(TYPE_ARGUMENT)!!
-        viewModel.updateOrdersList(type)
-
         viewModel.ordersItemUiState.observe(this as LifecycleOwner) { state ->
             when (state) {
                 is OrdersItemUiState.Default -> {
                     binding.progressContainerItemViewPager2Orders.state =
                         ProgressContainer.State.Success
                     orderAdapter.setOrders(state.orders)
+                    orderAdapter.setOnItemClickListener { orderId ->
+                        viewModel.cancelOrder(orderId, type)
+                    }
+                    onSizeChange(state.orders.size)
                 }
                 is OrdersItemUiState.Loading -> {
                     binding.progressContainerItemViewPager2Orders.state =

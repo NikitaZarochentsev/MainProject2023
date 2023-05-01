@@ -5,9 +5,9 @@ import com.example.mainproject.domain.models.Product
 import com.example.mainproject.domain.models.Profile
 
 interface MockRepository {
-    suspend fun signIn(login: String, password: String): Result<Boolean>
+    suspend fun signIn(login: String, password: String): Result<Profile>
 
-    suspend fun getProducts(): Result<List<Product>>
+    suspend fun getProducts(pageNumber: Int, pageSize: Int): Result<List<Product>>
 
     suspend fun getProfile(): Result<Profile>
 
@@ -16,4 +16,6 @@ interface MockRepository {
     suspend fun getProduct(productId: String): Result<Product>
 
     suspend fun getOrders(): Result<List<Order>>
+
+    suspend fun cancelOrder(orderId: String): Result<Order>
 }

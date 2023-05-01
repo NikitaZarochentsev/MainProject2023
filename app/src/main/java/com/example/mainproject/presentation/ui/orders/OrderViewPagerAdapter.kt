@@ -5,14 +5,21 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class OrderViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
+    private var items = listOf<OrdersItemViewPager2Fragment>()
+
     override fun getItemCount(): Int {
-        return 2
+        return items.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return OrdersItemViewPager2Fragment.newInstance(
-            if (position == 1) OrdersItemViewPager2Fragment.ACTIVE_TYPE
-            else OrdersItemViewPager2Fragment.ALL_TYPE
-        )
+        return items[position]
+    }
+
+    fun setItems(items: List<OrdersItemViewPager2Fragment>) {
+        this.items = items
+    }
+
+    fun getItems(): List<OrdersItemViewPager2Fragment> {
+        return items
     }
 }

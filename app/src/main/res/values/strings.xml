@@ -46,8 +46,10 @@
 
     <string name="orders_toolbar_title">@string/profile_button_orders</string>
 
-    <string name="text_tab_all">Все %1$d</string>
-    <string name="text_tab_active">Активные %1$d</string>
+    <string name="text_tab_all">Все</string>
+    <string name="text_tab_active">Активные</string>
+    <string name="text_tab_all_number">Все %1$d</string>
+    <string name="text_tab_active_number">Активные %1$d</string>
 
     <string name="item_orders_header">Заказ №%1$d от %2$s</string>
     <string name="date_order_header_format">dd.MM.uu kk:mm</string>

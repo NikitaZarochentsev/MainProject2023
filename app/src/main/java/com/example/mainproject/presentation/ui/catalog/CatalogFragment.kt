@@ -31,6 +31,11 @@ class CatalogFragment : Fragment() {
         catalogAdapter = CatalogAdapter(parentFragmentManager)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updateProductList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,7 +63,6 @@ class CatalogFragment : Fragment() {
         }
 
         initRecyclerView()
-        viewModel.updateProductList()
 
         viewModel.catalogUiState.observe(this as LifecycleOwner) { state ->
             when (state) {

@@ -3,7 +3,9 @@ package com.example.mainproject.data
 import com.example.mainproject.domain.models.*
 import com.example.mainproject.domain.repositories.MockRepository
 import kotlinx.coroutines.delay
-import java.util.UUID
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MockRepositoryImpl : MockRepository {
 
@@ -14,6 +16,12 @@ class MockRepositoryImpl : MockRepository {
         private val orderIds = (0..6).map {
             UUID.randomUUID().toString()
         }
+        private val profile = Profile(
+            "Олег",
+            "Виноградов",
+            "Разработчик",
+            "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+        )
         private val products = listOf(
             Product(
                 id = productIds[0],
@@ -286,7 +294,7 @@ class MockRepositoryImpl : MockRepository {
                 )
             )
         )
-        private val orders = listOf(
+        private var orders = listOf(
             Order(
                 id = orderIds[0],
                 number = 1,
@@ -370,15 +378,16 @@ class MockRepositoryImpl : MockRepository {
 
     private lateinit var token: String
 
-    override suspend fun signIn(login: String, password: String): Result<Boolean> {
+    override suspend fun signIn(login: String, password: String): Result<Profile> {
         randomDelay()
         token = "AAAAAAAAAAAAAAAAAAAAAFnz2wAAAAAACOwLSPtVT5gxxxxxxxxxxxx"
-        return Result.success(true)
+        return Result.success(profile)
     }
 
-    override suspend fun getProducts(): Result<List<Product>> {
+    override suspend fun getProducts(pageNumber: Int, pageSize: Int): Result<List<Product>> {
         randomDelay()
-        return randomResult(products)
+        val productsResult = products.drop(pageSize * (pageNumber - 1)).take(pageSize)
+        return randomResult(productsResult)
     }
 
     override suspend fun getProfile(): Result<Profile> {
@@ -407,6 +416,18 @@ class MockRepositoryImpl : MockRepository {
         return Result.success(orders)
     }
 
+    override suspend fun cancelOrder(orderId: String): Result<Order> {
+        randomDelay()
+        val order = orders.find { it.id == orderId }?.apply {
+            status = OrderStatus.cancelled
+            etd = OffsetDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)
+        }
+        if (order != null) {
+            return Result.success(order)
+        } else {
+            return Result.failure(RuntimeException())
+        }
+    }
 
     private suspend fun randomDelay() {
         delay((100L..1000L).random())

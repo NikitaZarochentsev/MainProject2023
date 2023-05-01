@@ -1,5 +1,6 @@
 package com.example.mainproject.presentation.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +28,16 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel: ProfileViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getProfile()
+        viewModel.getVersionApplication()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
@@ -63,17 +70,11 @@ class ProfileFragment : Fragment() {
             signOutDialog.show(parentFragmentManager, null)
         }
 
-        val version = viewModel.getVersionApplication()
-        binding.textViewVersionProfile.text =
-            getString(R.string.text_application_version, version.first, version.second)
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.textViewVersionProfile) { view, insets ->
             val navigationBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
             view.updatePadding(bottom = navigationBarInsets.bottom)
             insets
         }
-
-        viewModel.getProfile()
 
         viewModel.profileUiState.observe(this as LifecycleOwner) { state ->
             when (state) {
@@ -101,6 +102,11 @@ class ProfileFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        viewModel.versionApp.observe(this as LifecycleOwner) { version ->
+            binding.textViewVersionProfile.text =
+                getString(R.string.text_application_version, version.first, version.second)
         }
     }
 }

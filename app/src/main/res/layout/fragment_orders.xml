@@ -35,6 +35,7 @@
                 android:id="@+id/tabLayoutOrders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabIndicatorFullWidth="true"
                 app:tabTextColor="@color/tab_text_color" />
 
             <androidx.viewpager2.widget.ViewPager2

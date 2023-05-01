@@ -19,7 +19,7 @@ class OrdersDiffCallback(
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldOrder = oldList[oldItemPosition]
         val newOrder = newList[newItemPosition]
-        return oldOrder.id == newOrder.id
+        return (oldOrder.status == newOrder.status) && (oldOrder.id == newOrder.id)
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

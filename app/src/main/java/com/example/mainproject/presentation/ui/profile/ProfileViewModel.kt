@@ -15,10 +15,11 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val getVersionApplicationUseCase: GetVersionApplicationUseCase,
-    private val signOutUseCase: SignOutUseCase
+    private val signOutUseCase: SignOutUseCase,
 ) : ViewModel() {
 
     val profileUiState = MutableLiveData<ProfileUiState>()
+    val versionApp = MutableLiveData<Pair<String, String>>()
 
     fun getProfile() {
         viewModelScope.launch {
@@ -33,8 +34,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun getVersionApplication(): Pair<String, String> {
-        return getVersionApplicationUseCase.invoke()
+    fun getVersionApplication() {
+        versionApp.value = getVersionApplicationUseCase.invoke()
     }
 
     fun signOut() {

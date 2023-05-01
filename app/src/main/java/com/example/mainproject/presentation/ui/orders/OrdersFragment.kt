@@ -1,7 +1,7 @@
 package com.example.mainproject.presentation.ui.orders
 
+import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +21,17 @@ class OrdersFragment : Fragment() {
     private val viewModel: OrderViewModel by viewModels()
     private lateinit var viewPagerAdapter: OrderViewPagerAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewPagerAdapter = OrderViewPagerAdapter(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentOrdersBinding.inflate(inflater, container, false)
-        viewPagerAdapter = OrderViewPagerAdapter(this)
         return binding.root
     }
 
@@ -38,12 +42,28 @@ class OrdersFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
+        binding.viewPager2Orders.offscreenPageLimit = 1
         binding.viewPager2Orders.adapter = viewPagerAdapter
+
+        val items = mutableListOf(
+            OrdersItemViewPager2Fragment.newInstance(OrdersItemViewPager2Fragment.ALL_TYPE),
+            OrdersItemViewPager2Fragment.newInstance(OrdersItemViewPager2Fragment.ACTIVE_TYPE)
+        )
+        for (item in items) {
+            item.initAdapter()
+        }
+        viewPagerAdapter.setItems(items)
 
         TabLayoutMediator(binding.tabLayoutOrders, binding.viewPager2Orders) { tab, position ->
             when (position) {
-                0 -> tab.text = resources.getString(R.string.text_tab_all)
-                1 -> tab.text = resources.getString(R.string.text_tab_active)
+                0 -> tab.text =
+                    resources.getString(
+                        R.string.text_tab_all
+                    )
+                1 -> tab.text =
+                    resources.getString(
+                        R.string.text_tab_active
+                    )
             }
         }.attach()
 
@@ -54,6 +74,19 @@ class OrdersFragment : Fragment() {
                 }
                 is OrdersUiState.Default -> {
                     binding.progressContainerOrders.state = ProgressContainer.State.Success
+                    val newItems = viewPagerAdapter.getItems()
+                    newItems.forEachIndexed { index, item ->
+                        item.setSizeChangeListener { size ->
+                            if (index == 0) {
+                                binding.tabLayoutOrders.getTabAt(index)?.text =
+                                    resources.getString(R.string.text_tab_all_number, size)
+                            } else {
+                                binding.tabLayoutOrders.getTabAt(index)?.text =
+                                    resources.getString(R.string.text_tab_active_number, size)
+                            }
+                        }
+                    }
+                    viewPagerAdapter.setItems(newItems)
                 }
                 is OrdersUiState.Empty -> {
                     binding.progressContainerOrders.state =
@@ -61,7 +94,7 @@ class OrdersFragment : Fragment() {
                             getString(R.string.progress_container_empty_title),
                             getString(R.string.progress_container_empty_description)
                         ) {
-
+                            // обновление списка заказов
                         }
                 }
                 is OrdersUiState.Error -> {
@@ -70,7 +103,7 @@ class OrdersFragment : Fragment() {
                             getString(R.string.progress_container_error_title),
                             getString(R.string.progress_container_error_description)
                         ) {
-
+                            // обновление списка заказов
                         }
                 }
             }

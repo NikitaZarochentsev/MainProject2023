@@ -6,15 +6,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-class GetOrdersUseCase(private val mockRepository: MockRepository) {
+class CancelOrderUseCase(private val mockRepository: MockRepository) {
 
-    suspend operator fun invoke(): Result<List<Order>> {
-        val orders = CoroutineScope(Dispatchers.IO).async {
-            val ordersResult = async {
-                mockRepository.getOrders()
+    suspend operator fun invoke(orderId: String): Result<Order> {
+        val order = CoroutineScope(Dispatchers.IO).async {
+            val cancelOrderResult = async {
+                mockRepository.cancelOrder(orderId)
             }
-
-            ordersResult.await()
+            cancelOrderResult.await()
                 .onSuccess {
                     return@async Result.success(it)
                 }
@@ -23,6 +22,6 @@ class GetOrdersUseCase(private val mockRepository: MockRepository) {
                 }
         }
 
-        return orders.await()
+        return order.await()
     }
 }

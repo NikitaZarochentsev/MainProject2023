@@ -1,5 +1,6 @@
 package com.example.mainproject.domain.usecases
 
+import com.example.mainproject.domain.models.Profile
 import com.example.mainproject.domain.repositories.MockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,7 @@ class SignInUseCase(private val mockRepository: MockRepository) {
     class IllegalLoginException : Exception()
     class IllegalPasswordException : Exception()
 
-    suspend operator fun invoke(login: String, password: String): Result<Boolean> {
+    suspend operator fun invoke(login: String, password: String): Result<Profile> {
         if (!loginVerify(login)) {
             return Result.failure(IllegalLoginException())
         }

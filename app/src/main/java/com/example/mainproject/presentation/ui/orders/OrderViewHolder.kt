@@ -1,5 +1,6 @@
 package com.example.mainproject.presentation.ui.orders
 
+import android.opengl.Visibility
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter
 class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val binding = ViewHolderItemOrdersBinding.bind(itemView)
+    val buttonExtra = binding.buttonExtraItemOrders
 
     fun bind(order: Order) {
         binding.imageViewItemOrders.load(order.productPreview) {
@@ -49,6 +51,7 @@ class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                         .format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.date_order_header_format))),
                     order.deliveryAddress
                 )
+                binding.buttonExtraItemOrders.visibility = View.VISIBLE
             }
             OrderStatus.cancelled -> {
                 binding.textViewEnabledItemOrders.text =
@@ -64,6 +67,7 @@ class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     OffsetDateTime.parse(order.etd, DateTimeFormatter.ISO_DATE_TIME)
                         .format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.date_order_header_format)))
                 )
+                binding.buttonExtraItemOrders.visibility = View.INVISIBLE
             }
             OrderStatus.done -> {
                 binding.textViewEnabledItemOrders.text =
@@ -79,6 +83,7 @@ class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     OffsetDateTime.parse(order.etd, DateTimeFormatter.ISO_DATE_TIME)
                         .format(DateTimeFormatter.ofPattern(itemView.resources.getString(R.string.date_order_header_format)))
                 )
+                binding.buttonExtraItemOrders.visibility = View.INVISIBLE
             }
         }
 
@@ -88,9 +93,5 @@ class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             order.productSize,
             order.productTitle
         )
-
-        binding.buttonExtraItemOrders.setOnClickListener {
-            Toast.makeText(itemView.context, R.string.item_orders_cancel, Toast.LENGTH_SHORT).show()
-        }
     }
 }
