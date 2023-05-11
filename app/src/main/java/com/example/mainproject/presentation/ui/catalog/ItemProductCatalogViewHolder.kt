@@ -8,19 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.mainproject.R
+import com.example.mainproject.databinding.ViewHolderItemProductCatalogBinding
 import com.example.mainproject.domain.models.Product
-import com.example.mainproject.databinding.ViewHolderItemCatalogBinding
 import com.example.mainproject.presentation.ui.product.ProductFragment
 
-class ItemCatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ItemProductCatalogViewHolder(itemView: View) :
+    RecyclerView.ViewHolder(itemView) {
 
-    private val binding = ViewHolderItemCatalogBinding.bind(itemView)
+    private val binding = ViewHolderItemProductCatalogBinding.bind(itemView)
 
     fun bind(product: Product, parentFragmentManager: FragmentManager) {
         binding.textViewHeaderItemCatalog.text = product.title
         binding.textViewDescriptionItemCatalog.text = product.department
         binding.textViewCostItemCatalog.text =
-            itemView.resources.getString(R.string.cost_rubles, product.price.toString())
+            itemView.resources.getString(
+                R.string.cost_rubles,
+                product.price.toString()
+            )
         binding.imageViewItemCatalog.load(product.preview) {
             transformations(
                 RoundedCornersTransformation(
@@ -32,7 +36,10 @@ class ItemCatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         binding.buttonBuyItemCatalog.setOnClickListener {
             Toast.makeText(
                 itemView.context,
-                itemView.resources.getString(R.string.cost_rubles, product.price.toString()),
+                itemView.resources.getString(
+                    R.string.cost_rubles,
+                    product.price.toString()
+                ),
                 Toast.LENGTH_SHORT
             ).show()
         }

@@ -8,10 +8,10 @@ import kotlinx.coroutines.async
 
 class GetProductsUseCase(private val mockRepository: MockRepository) {
 
-    suspend operator fun invoke(): Result<List<Product>> {
+    suspend operator fun invoke(pageNumber: Int): Result<List<Product>> {
         val products = CoroutineScope(Dispatchers.IO).async {
             val productsResult = async {
-                mockRepository.getProducts(1,6)
+                mockRepository.getProducts(pageNumber, 6)
             }
 
             productsResult.await()

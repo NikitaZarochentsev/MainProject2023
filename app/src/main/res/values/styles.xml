@@ -113,6 +113,22 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="TextAppearance.LastItemCatalog">
+        <item name="android:textSize">@dimen/text_last_item_catalog_size</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.MainProject.Button.LastItemCatalog" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">@style/TextAppearance.LastItemCatalog.Button</item>
+    </style>
+
+    <style name="TextAppearance.LastItemCatalog.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_button_last_item_catalog_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_last_item_catalog_line</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
     <style name="TextAppearance.Product">
         <item name="android:textColor">@color/black</item>
     </style>
@@ -264,6 +280,15 @@
         <item name="android:textSize">@dimen/text_item_orders_h4_size</item>
         <item name="android:lineSpacingExtra">@dimen/text_item_orders_h4_line</item>
         <item name="android:textColor">@color/silver_chalice</item>
+    </style>
+
+    <style name="Theme.MainProject.CardView.ItemOrders" parent="Widget.Material3.CardView.Filled">
+        <item name="shapeAppearance">@style/Theme.MainProject.CardView.ItemOrders.ShapeAppearance
+        </item>
+    </style>
+
+    <style name="Theme.MainProject.CardView.ItemOrders.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerSize">@dimen/card_view_order_border_radius</item>
     </style>
 
 </resources>

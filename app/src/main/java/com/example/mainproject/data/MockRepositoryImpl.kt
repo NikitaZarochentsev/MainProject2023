@@ -10,7 +10,7 @@ import java.util.*
 class MockRepositoryImpl : MockRepository {
 
     companion object {
-        private val productIds = (0..6).map {
+        private val productIds = (0..12).map {
             UUID.randomUUID().toString()
         }
         private val orderIds = (0..6).map {
@@ -160,7 +160,7 @@ class MockRepositoryImpl : MockRepository {
             ),
             Product(
                 id = productIds[3],
-                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #1",
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #4",
                 department = "Джерси",
                 price = 9000,
                 badge = Badge(
@@ -205,7 +205,7 @@ class MockRepositoryImpl : MockRepository {
             ),
             Product(
                 id = productIds[4],
-                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #1",
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #5",
                 department = "Джерси",
                 price = 9000,
                 badge = Badge(
@@ -250,7 +250,277 @@ class MockRepositoryImpl : MockRepository {
             ),
             Product(
                 id = productIds[5],
-                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #1",
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #6",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[6],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #7",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[7],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #8",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[8],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #9",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[9],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #10",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[10],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #11",
+                department = "Джерси",
+                price = 9000,
+                badge = Badge(
+                    value = "Хит сезона",
+                    color = "#3C72BF"
+                ),
+                preview = "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3533000/ff_3533150-d9254664c08370f8572c_full.jpg&w=340",
+                images = listOf(
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900",
+                    "https://fanatics.frgimages.com/FFImage/thumb.aspx?i=/productimages/_3888000/altimages/ff_3888062-f848e302bef4a86eff9aalt3_full.jpg&w=900"
+                ),
+                sizes = listOf(
+                    Size(
+                        value = "S",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "M",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "L",
+                        isAvailable = true
+                    ),
+                    Size(
+                        value = "XL",
+                        isAvailable = true
+                    )
+                ),
+                description = "The Tampa Bay Buccaneers are headed to Super Bowl LV! As a major fan, this is no surprise but it's definitely worth celebrating, especially after the unprecedented 2020 NFL season. Add this Tom Brady Game Jersey to your collection to ensure you're Super Bowl ready. This Nike gear features bold commemorative graphics that will let the Tampa Bay Buccaneers know they have the best fans in the league.",
+                details = listOf(
+                    "Material: 100% Polyester",
+                    "Foam tongue helps reduce lace pressure.",
+                    "Mesh in the upper provides a breathable and plush sensation that stretches with your foot.",
+                    "Midfoot webbing delivers security. The webbing tightens around your foot when you lace up, letting you choose your fit and feel.",
+                    "Nike React foam is lightweight, springy and durable. More foam means better cushioning without the bulk. A Zoom Air unit in the forefoot delivers more bounce with every step. It's top-loaded to be closer to your foot for responsiveness.",
+                    "The classic fit and feel of the Pegasus is back—with a wider toe box to provide extra room. Seaming on the upper provides a better shape and fit, delivering a fresh take on an icon.",
+                    "Officially licensed",
+                    "Imported",
+                    "Brand: Nike"
+                )
+            ),
+            Product(
+                id = productIds[11],
+                title = "Men's Nike J.J. Watt Black Arizona Cardinals Legend Jersey #12",
                 department = "Джерси",
                 price = 9000,
                 badge = Badge(
@@ -386,7 +656,7 @@ class MockRepositoryImpl : MockRepository {
 
     override suspend fun getProducts(pageNumber: Int, pageSize: Int): Result<List<Product>> {
         randomDelay()
-        val productsResult = products.drop(pageSize * (pageNumber - 1)).take(pageSize)
+        val productsResult = products.drop(pageSize * pageNumber).take(pageSize)
         return randomResult(productsResult)
     }
 
@@ -411,9 +681,10 @@ class MockRepositoryImpl : MockRepository {
         return Result.success(products.first { it.id == productId })
     }
 
-    override suspend fun getOrders(): Result<List<Order>> {
+    override suspend fun getOrders(pageNumber: Int, pageSize: Int): Result<List<Order>> {
         randomDelay()
-        return Result.success(orders)
+        val ordersResult = orders.drop(pageSize * pageNumber).take(pageSize)
+        return randomResult(ordersResult)
     }
 
     override suspend fun cancelOrder(orderId: String): Result<Order> {

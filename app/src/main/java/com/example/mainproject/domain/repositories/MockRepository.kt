@@ -15,7 +15,7 @@ interface MockRepository {
 
     suspend fun getProduct(productId: String): Result<Product>
 
-    suspend fun getOrders(): Result<List<Order>>
+    suspend fun getOrders(pagerNumber: Int, pageSize: Int): Result<List<Order>>
 
     suspend fun cancelOrder(orderId: String): Result<Order>
 }

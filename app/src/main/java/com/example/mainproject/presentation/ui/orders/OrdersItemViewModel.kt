@@ -3,6 +3,7 @@ package com.example.mainproject.presentation.ui.orders
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mainproject.domain.models.Order
 import com.example.mainproject.domain.models.OrderStatus
 import com.example.mainproject.domain.usecases.CancelOrderUseCase
 import com.example.mainproject.domain.usecases.GetOrdersUseCase
@@ -18,16 +19,21 @@ class OrdersItemViewModel @Inject constructor(
     ViewModel() {
 
     val ordersItemUiState = MutableLiveData<OrdersItemUiState>()
+    val ordersList = MutableLiveData<List<Order>>()
+    var isLoading = false
+
+    private var nexPageNumber = 0
 
     private val handlerException = CoroutineExceptionHandler { _, throwable ->
         ordersItemUiState.value = OrdersItemUiState.Error(throwable)
     }
 
     fun updateOrdersList(type: String) {
+        isLoading = true
         ordersItemUiState.value = OrdersItemUiState.Loading
         viewModelScope.launch(handlerException) {
             val ordersResult = async {
-                getOrdersUseCase.invoke()
+                getOrdersUseCase.invoke(0)
             }
 
             ordersResult.await()
@@ -35,16 +41,16 @@ class OrdersItemViewModel @Inject constructor(
                     withContext(Dispatchers.Main) {
                         val ordersActive = orders.filter { it.status == OrderStatus.in_work }
                         if (type == OrdersItemViewPager2Fragment.ALL_TYPE) {
-                            if (orders.isEmpty()) {
-                                ordersItemUiState.value = OrdersItemUiState.Empty
-                            } else {
-                                ordersItemUiState.value = OrdersItemUiState.Default(orders)
+                            ordersList.value = orders
+                            if (orders.isNotEmpty()) {
+                                nexPageNumber = 1
+                                ordersItemUiState.value = OrdersItemUiState.ListDisplay
                             }
                         } else {
-                            if (ordersActive.isEmpty()) {
-                                ordersItemUiState.value = OrdersItemUiState.Empty
-                            } else {
-                                ordersItemUiState.value = OrdersItemUiState.Default(ordersActive)
+                            ordersList.value = ordersActive
+                            if (ordersActive.isNotEmpty()) {
+                                nexPageNumber = 1
+                                ordersItemUiState.value = OrdersItemUiState.ListDisplay
                             }
                         }
                     }
@@ -52,6 +58,58 @@ class OrdersItemViewModel @Inject constructor(
                 .onFailure {
                     ordersItemUiState.value = OrdersItemUiState.Error(it)
                 }
+
+            isLoading = false
+        }
+    }
+
+    fun loadOrderPage(type: String) {
+        isLoading = true
+        viewModelScope.launch(handlerException) {
+            val ordersResult = async {
+                getOrdersUseCase.invoke(nexPageNumber)
+            }
+
+            ordersResult.await()
+                .onSuccess { newOrders ->
+                    withContext(Dispatchers.Main) {
+                        val newOrdersActive = newOrders.filter { it.status == OrderStatus.in_work }
+                        if (type == OrdersItemViewPager2Fragment.ALL_TYPE) {
+                            if (newOrders.isEmpty()) {
+                                ordersItemUiState.value = OrdersItemUiState.FullListDisplay
+                            } else {
+                                nexPageNumber += 1
+                                val oldOrders = ordersList.value
+                                val allOrders = mutableListOf<Order>()
+                                if (oldOrders != null) {
+                                    allOrders.addAll(oldOrders)
+                                }
+                                allOrders.addAll(newOrders)
+                                ordersList.value = allOrders
+                                ordersItemUiState.value = OrdersItemUiState.ListDisplay
+                            }
+                        } else {
+                            if (newOrdersActive.isEmpty()) {
+                                ordersItemUiState.value = OrdersItemUiState.FullListDisplay
+                            } else {
+                                nexPageNumber += 1
+                                val oldOrders = ordersList.value
+                                val allOrders = mutableListOf<Order>()
+                                if (oldOrders != null) {
+                                    allOrders.addAll(oldOrders)
+                                }
+                                allOrders.addAll(newOrdersActive)
+                                ordersList.value = allOrders
+                                ordersItemUiState.value = OrdersItemUiState.ListDisplay
+                            }
+                        }
+                    }
+                }
+                .onFailure {
+                    ordersItemUiState.value = OrdersItemUiState.Error(it)
+                }
+
+            isLoading = false
         }
     }
 
