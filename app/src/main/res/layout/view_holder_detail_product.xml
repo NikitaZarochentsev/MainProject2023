@@ -20,10 +20,12 @@
 
     <TextView
         android:id="@+id/textViewDetailProduct"
-        style="@style/TextAppearance.Product.H5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_50"
+        android:lineSpacingExtra="6sp"
+        android:textColor="@color/silver_chalice"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/dotDetailProduct"

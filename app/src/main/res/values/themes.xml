@@ -9,6 +9,7 @@
         <item name="colorSurface">@color/smalt</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="textInputStyle">@style/Theme.MainProject.TextInputLayout</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.App.DataPicker</item>
     </style>
 
     <style name="ThemeOverlay.Material3.Toolbar.Surface.Catalog">
@@ -19,6 +20,10 @@
     <style name="ThemeOverlay.Material3.Toolbar.Surface.Product">
         <item name="titleTextColor">@color/smalt</item>
         <item name="navigationIconTint">@color/smalt</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DataPicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorSurface">@color/white</item>
     </style>
 
 </resources>

@@ -17,7 +17,7 @@ class CatalogViewModel @Inject constructor(private val getProductsUseCase: GetPr
     val products = MutableLiveData<List<Product>>()
     var isLoading = false
 
-    private var nextPageNumber = 0
+    private var nextPageNumber = 1
 
     private val handlerException = CoroutineExceptionHandler { _, throwable ->
         catalogUiState.value = CatalogUiState.Error(throwable)
@@ -26,10 +26,10 @@ class CatalogViewModel @Inject constructor(private val getProductsUseCase: GetPr
     fun updateProductList() {
         isLoading = true
         catalogUiState.value = CatalogUiState.Loading
-        nextPageNumber = 0
+        nextPageNumber = 1
         viewModelScope.launch(handlerException) {
             val productsResult = async {
-                getProductsUseCase.invoke(0)
+                getProductsUseCase.invoke(1)
             }
 
             productsResult.await()
@@ -37,7 +37,7 @@ class CatalogViewModel @Inject constructor(private val getProductsUseCase: GetPr
                     withContext(Dispatchers.Main) {
                         products.value = productList
                         if (productList.isNotEmpty()) {
-                            nextPageNumber = 1
+                            nextPageNumber = 2
                             catalogUiState.value = CatalogUiState.ListDisplay
                         }
                     }

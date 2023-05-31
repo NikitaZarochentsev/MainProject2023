@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,10 @@ import androidx.viewpager.widget.ViewPager
 import com.example.mainproject.R
 import com.example.mainproject.databinding.FragmentProductBinding
 import com.example.mainproject.presentation.ui.customviews.ProgressContainer
+import com.example.mainproject.presentation.ui.neworder.NewOrderFragment
+import com.example.mainproject.presentation.ui.product.detailsList.DetailsAdapter
+import com.example.mainproject.presentation.ui.product.preview.PreviewAdapter
+import com.example.mainproject.presentation.ui.product.preview.PreviewItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +29,8 @@ class ProductFragment : Fragment() {
 
     private lateinit var binding: FragmentProductBinding
     private val viewModel: ProductViewModel by viewModels()
-    private val productPreviewAdapter: ProductPreviewAdapter = ProductPreviewAdapter()
-    private var productDetailAdapter: ProductDetailAdapter = ProductDetailAdapter()
+    private val previewAdapter: PreviewAdapter = PreviewAdapter()
+    private var detailsAdapter: DetailsAdapter = DetailsAdapter()
 
     private lateinit var productId: String
 
@@ -44,7 +49,7 @@ class ProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentProductBinding.inflate(inflater, container, false)
         return binding.root
@@ -78,7 +83,7 @@ class ProductFragment : Fragment() {
                 }
                 is ProductUiState.Default -> {
                     val imagesProduct = listOf(state.product.preview) + state.product.images
-                    binding.viewPagerIconsProduct.adapter = ProductViewPagerAdapter(
+                    binding.viewPagerIconsProduct.adapter = ProductPagerAdapter(
                         requireContext(),
                         imagesProduct
                     )
@@ -90,21 +95,21 @@ class ProductFragment : Fragment() {
                         }
 
                         override fun onPageSelected(position: Int) {
-                            productPreviewAdapter.setCurrentItemPosition(position)
+                            previewAdapter.setCurrentItemPosition(position)
                         }
 
                         override fun onPageScrolled(
                             position: Int,
                             positionOffset: Float,
-                            positionOffsetPixels: Int
+                            positionOffsetPixels: Int,
                         ) {
 
                         }
                     })
 
-                    productPreviewAdapter.setImageUrls(imagesProduct)
+                    previewAdapter.setImageUrls(imagesProduct)
 
-                    productPreviewAdapter.setOnItemClickListener { position ->
+                    previewAdapter.setOnItemClickListener { position ->
                         binding.viewPagerIconsProduct.currentItem = position
                     }
 
@@ -120,19 +125,37 @@ class ProductFragment : Fragment() {
                     binding.textSizeProduct.inputType = InputType.TYPE_NULL
 
                     binding.textSizeProduct.setOnClickListener {
-                        val sizeBottomFragment = ProductSizeBottomFragment(sizesProduct)
-                        sizeBottomFragment.show(parentFragmentManager, null)
+                        val sizesBottomFragment = SizesBottomFragment(sizesProduct)
+                        sizesBottomFragment.show(parentFragmentManager, null)
                     }
 
                     parentFragmentManager.setFragmentResultListener(
-                        ProductSizeBottomFragment.REQUEST_KEY,
+                        SizesBottomFragment.REQUEST_KEY,
                         this
                     ) { _, result ->
-                        binding.textSizeProduct.setText(result.getString(ProductSizeBottomFragment.RESPONSE_KEY))
+                        binding.textSizeProduct.setText(result.getString(SizesBottomFragment.RESPONSE_KEY))
                     }
 
                     binding.textViewDescriptionProduct.text = state.product.description
-                    productDetailAdapter.setDetails(state.product.details)
+                    detailsAdapter.setDetails(state.product.details)
+
+                    binding.buttonBuy.setOnClickListener {
+                        parentFragmentManager.commit {
+                            setReorderingAllowed(true)
+                            replace(
+                                R.id.fragmentContainerViewMain,
+                                NewOrderFragment.newInstance(
+                                    state.product.preview,
+                                    binding.textSizeProduct.text.toString(),
+                                    state.product.title,
+                                    state.product.department,
+                                    state.product.price,
+                                    state.product.id
+                                )
+                            )
+                            addToBackStack(null)
+                        }
+                    }
 
                     binding.progressContainerProduct.state = ProgressContainer.State.Success
                 }
@@ -149,16 +172,16 @@ class ProductFragment : Fragment() {
     }
 
     private fun initPreviewRecyclerView() {
-        binding.recyclerViewPreviewProduct.adapter = productPreviewAdapter
+        binding.recyclerViewPreviewProduct.adapter = previewAdapter
         binding.recyclerViewPreviewProduct.layoutManager =
             LinearLayoutManager(requireView().context, LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerViewPreviewProduct.addItemDecoration(ProductPreviewItemDecoration())
+        binding.recyclerViewPreviewProduct.addItemDecoration(PreviewItemDecoration())
     }
 
     private fun initDetailRecyclerView() {
-        binding.recyclerViewDetailsProduct.adapter = productDetailAdapter
+        binding.recyclerViewDetailsProduct.adapter = detailsAdapter
         binding.recyclerViewDetailsProduct.layoutManager =
             LinearLayoutManager(requireView().context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewDetailsProduct.addItemDecoration(ProductPreviewItemDecoration())
+        binding.recyclerViewDetailsProduct.addItemDecoration(PreviewItemDecoration())
     }
 }

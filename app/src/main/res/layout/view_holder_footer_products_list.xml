@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.MainProject.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <com.example.mainproject.presentation.ui.customviews.ProgressItem
+        android:id="@+id/progressItemCatalog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/recycler_view_list_background"
+        android:minHeight="@dimen/normal_100">
+
+    </com.example.mainproject.presentation.ui.customviews.ProgressItem>
+
+</com.google.android.material.card.MaterialCardView>

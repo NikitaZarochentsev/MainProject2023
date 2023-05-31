@@ -4,5 +4,5 @@ data class Profile(
     var name: String,
     var surname: String,
     var occupation: String,
-    var avatarUrl: String
+    var avatarId: String
 )

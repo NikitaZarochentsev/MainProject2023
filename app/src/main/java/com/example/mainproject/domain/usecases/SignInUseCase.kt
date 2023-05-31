@@ -1,17 +1,20 @@
 package com.example.mainproject.domain.usecases
 
-import com.example.mainproject.domain.models.Profile
-import com.example.mainproject.domain.repositories.MockRepository
+import com.example.mainproject.data.CowboysRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-class SignInUseCase(private val mockRepository: MockRepository) {
+class SignInUseCase(
+    private val cowboysRepository: CowboysRepository,
+    private val cowboysSharedPreferences: CowboysSharedPreferences,
+) {
 
     class IllegalLoginException : Exception()
     class IllegalPasswordException : Exception()
 
-    suspend operator fun invoke(login: String, password: String): Result<Profile> {
+    suspend operator fun invoke(login: String, password: String): Result<Any> {
         if (!loginVerify(login)) {
             return Result.failure(IllegalLoginException())
         }
@@ -20,13 +23,10 @@ class SignInUseCase(private val mockRepository: MockRepository) {
         }
 
         val result = CoroutineScope(Dispatchers.IO).async {
-            val signInResult = async {
-                mockRepository.signIn(login, password)
-            }
-
-            signInResult.await()
-                .onSuccess {
-                    return@async Result.success(it)
+            cowboysRepository.signIn(login, password)
+                .onSuccess { token ->
+                    cowboysSharedPreferences.saveToken(token)
+                    return@async Result.success(Unit)
                 }
                 .onFailure {
                     Result.failure<Throwable>(it)

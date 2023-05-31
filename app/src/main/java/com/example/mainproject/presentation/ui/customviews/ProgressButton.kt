@@ -13,7 +13,7 @@ import kotlin.properties.Delegates
 class ProgressButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val binding: ViewProgressButtonBinding
@@ -44,5 +44,9 @@ class ProgressButton @JvmOverloads constructor(
 
     override fun setOnClickListener(l: OnClickListener?) {
         binding.button.setOnClickListener(l)
+    }
+
+    fun setText(text: String) {
+        binding.button.text = text
     }
 }

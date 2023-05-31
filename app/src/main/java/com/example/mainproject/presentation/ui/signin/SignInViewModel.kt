@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.mainproject.domain.usecases.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,24 +18,22 @@ class SignInViewModel @Inject constructor(private val signInUseCase: SignInUseCa
     fun signIn(login: String, password: String) {
         signInUiState.value = SignInUiState.Loading
 
-        viewModelScope.launch {
-            val signInResult = async {
-                signInUseCase.invoke(login, password)
-            }
-
-            signInResult.await()
+        viewModelScope.launch(Dispatchers.IO) {
+            signInUseCase.invoke(login, password)
                 .onSuccess {
                     withContext(Dispatchers.Main) {
                         signInUiState.value = SignInUiState.Success
                     }
                 }
                 .onFailure {
-                    when (it) {
-                        is SignInUseCase.IllegalLoginException -> signInUiState.value =
-                            SignInUiState.LoginError
-                        is SignInUseCase.IllegalPasswordException -> signInUiState.value =
-                            SignInUiState.PasswordError
-                        else -> signInUiState.value = SignInUiState.Error
+                    withContext(Dispatchers.Main) {
+                        when (it) {
+                            is SignInUseCase.IllegalLoginException -> signInUiState.value =
+                                SignInUiState.LoginError
+                            is SignInUseCase.IllegalPasswordException -> signInUiState.value =
+                                SignInUiState.PasswordError
+                            else -> signInUiState.value = SignInUiState.Error
+                        }
                     }
                 }
         }

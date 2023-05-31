@@ -25,7 +25,9 @@
                 android:id="@+id/imageViewProfile"
                 android:layout_width="@dimen/image_profile_size"
                 android:layout_height="@dimen/image_profile_size"
+                android:background="@drawable/avatar_background"
                 android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/textViewTitleProfile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -34,20 +36,24 @@
 
             <TextView
                 android:id="@+id/textViewTitleProfile"
-                style="@style/TextAppearance.Profile.H1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/normal_100"
+                android:lineSpacingExtra="2sp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageViewProfile" />
 
             <TextView
                 android:id="@+id/textViewSubtitleProfile"
-                style="@style/TextAppearance.Profile.H2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/normal_100"
+                android:lineSpacingExtra="4sp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +71,7 @@
         <Button
             android:id="@+id/buttonOrdersProfile"
             style="@style/Theme.MainProject.Button.Profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/normal_100"
             android:layout_marginTop="@dimen/normal_150"
@@ -73,6 +79,7 @@
             app:icon="@drawable/ic_orders"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonSettingsProfile"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0" />
@@ -80,8 +87,9 @@
         <Button
             android:id="@+id/buttonSettingsProfile"
             style="@style/Theme.MainProject.Button.Profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_100"
             android:layout_marginTop="@dimen/normal_150"
             android:text="@string/profile_button_settings"
             app:icon="@drawable/ic_settings"
@@ -94,8 +102,9 @@
         <Button
             android:id="@+id/buttonSignOutProfile"
             style="@style/Theme.MainProject.Button.Profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_100"
             android:layout_marginTop="@dimen/normal_150"
             android:layout_marginEnd="@dimen/normal_100"
             android:backgroundTint="@color/red"
@@ -111,10 +120,12 @@
 
         <TextView
             android:id="@+id/textViewVersionProfile"
-            style="@style/TextAppearance.Profile.H3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/normal_100"
+            android:lineSpacingExtra="8sp"
+            android:textColor="@color/silver_chalice"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

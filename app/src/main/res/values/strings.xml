@@ -49,10 +49,8 @@
 
     <string name="orders_toolbar_title">@string/profile_button_orders</string>
 
-    <string name="text_tab_all">Все</string>
-    <string name="text_tab_active">Активные</string>
-    <string name="text_tab_all_number">Все %1$d</string>
-    <string name="text_tab_active_number">Активные %1$d</string>
+    <string name="text_tab_all">Все %1$d</string>
+    <string name="text_tab_active">Активные %1$d</string>
 
     <string name="item_orders_header">Заказ №%1$d от %2$s</string>
     <string name="date_order_header_format">dd.MM.uu kk:mm</string>
@@ -67,4 +65,20 @@
     <string name="item_orders_done_information">Был доставлен %1$s</string>
 
     <string name="item_orders_cancel">Отменить</string>
+
+    <string name="new_order_toolbar_title">Оформление заказа</string>
+    <string name="new_order_product_title">%1$s • %2$s</string>
+    <string name="new_order_location_hint">Дом</string>
+    <string name="new_order_apartment_hint">Квартира</string>
+    <string name="new_order_date_hint">Дата доставки</string>
+    <string name="new_order_button">Купить за %1$s ₽</string>
+    <string name="date_picker_title">Выбор даты</string>
+    <string name="map_title">Выбор дома</string>
+    <string name="map_button_enter">Выбрать</string>
+
+    <string name="settings_name_hint">Имя</string>
+    <string name="settings_surname_hint">Фамилия</string>
+    <string name="settings_occupation_hint">Род деятельности</string>
+    <string name="settings_button_change">Изменить</string>
+    <string name="settings_error_empty">Введите значение</string>
 </resources>

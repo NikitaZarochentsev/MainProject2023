@@ -1,8 +1,5 @@
 package com.example.mainproject.domain.models
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
 data class Order(
     var id: String,
     var number: Int,

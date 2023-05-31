@@ -1,10 +1,12 @@
 package com.example.mainproject.di
 
-import com.example.mainproject.data.MockRepositoryImpl
-import com.example.mainproject.domain.repositories.MockRepository
+import android.content.Context
+import com.example.mainproject.data.CowboysRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -14,7 +16,13 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideMockRepository(): MockRepository {
-        return MockRepositoryImpl()
+    fun provideCowboysRepository(): CowboysRepository {
+        return CowboysRepository()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCowboysSharedPreferences(@ApplicationContext context: Context): CowboysSharedPreferences {
+        return CowboysSharedPreferences(context)
     }
 }

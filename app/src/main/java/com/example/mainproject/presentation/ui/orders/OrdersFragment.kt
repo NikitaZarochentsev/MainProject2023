@@ -18,12 +18,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersBinding
-    private val viewModel: OrderViewModel by viewModels()
-    private lateinit var viewPagerAdapter: OrderViewPagerAdapter
+    private val viewModel: OrdersViewModel by viewModels()
+    private lateinit var viewPagerAdapter: OrdersPagerAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewPagerAdapter = OrderViewPagerAdapter(this)
+        viewPagerAdapter = OrdersPagerAdapter(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updateOrderList()
     }
 
     override fun onCreateView(
@@ -42,60 +47,15 @@ class OrdersFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.viewPager2Orders.offscreenPageLimit = 1
-        binding.viewPager2Orders.adapter = viewPagerAdapter
-
-        val items = mutableListOf(
-            OrdersItemViewPager2Fragment.newInstance(OrdersItemViewPager2Fragment.ALL_TYPE),
-            OrdersItemViewPager2Fragment.newInstance(OrdersItemViewPager2Fragment.ACTIVE_TYPE)
-        )
-        for (item in items) {
-            item.initAdapter()
-        }
-        viewPagerAdapter.setItems(items)
-
-        TabLayoutMediator(binding.tabLayoutOrders, binding.viewPager2Orders) { tab, position ->
-            when (position) {
-                0 -> tab.text =
-                    resources.getString(
-                        R.string.text_tab_all
-                    )
-                1 -> tab.text =
-                    resources.getString(
-                        R.string.text_tab_active
-                    )
-            }
-        }.attach()
+        initViewPager()
 
         viewModel.ordersUiState.observe(this as LifecycleOwner) { state ->
             when (state) {
                 is OrdersUiState.Loading -> {
                     binding.progressContainerOrders.state = ProgressContainer.State.Loading
                 }
-                is OrdersUiState.Default -> {
+                is OrdersUiState.ListDisplay -> {
                     binding.progressContainerOrders.state = ProgressContainer.State.Success
-                    val newItems = viewPagerAdapter.getItems()
-                    newItems.forEachIndexed { index, item ->
-                        item.setSizeChangeListener { size ->
-                            if (index == 0) {
-                                binding.tabLayoutOrders.getTabAt(index)?.text =
-                                    resources.getString(R.string.text_tab_all_number, size)
-                            } else {
-                                binding.tabLayoutOrders.getTabAt(index)?.text =
-                                    resources.getString(R.string.text_tab_active_number, size)
-                            }
-                        }
-                    }
-                    viewPagerAdapter.setItems(newItems)
-                }
-                is OrdersUiState.Empty -> {
-                    binding.progressContainerOrders.state =
-                        ProgressContainer.State.Notice(
-                            getString(R.string.progress_container_empty_title),
-                            getString(R.string.progress_container_empty_description)
-                        ) {
-                            // обновление списка заказов
-                        }
                 }
                 is OrdersUiState.Error -> {
                     binding.progressContainerOrders.state =
@@ -103,10 +63,55 @@ class OrdersFragment : Fragment() {
                             getString(R.string.progress_container_error_title),
                             getString(R.string.progress_container_error_description)
                         ) {
-                            // обновление списка заказов
+                            viewModel.updateOrderList()
+                        }
+                }
+                is OrdersUiState.FullListDisplay -> {
+                    binding.progressContainerOrders.state = ProgressContainer.State.Success
+                }
+                is OrdersUiState.Empty -> {
+                    binding.progressContainerOrders.state =
+                        ProgressContainer.State.Notice(
+                            getString(R.string.progress_container_empty_title),
+                            getString(R.string.progress_container_empty_description)
+                        ) {
+                            viewModel.updateOrderList()
                         }
                 }
             }
         }
+
+        viewModel.ordersAll.observe(this as LifecycleOwner) { orders ->
+            binding.tabLayoutOrders.getTabAt(0)?.text =
+                resources.getString(R.string.text_tab_all, orders.size)
+        }
+
+        viewModel.ordersActive.observe(this as LifecycleOwner) { orders ->
+            binding.tabLayoutOrders.getTabAt(1)?.text =
+                resources.getString(R.string.text_tab_active, orders.size)
+        }
+    }
+
+    private fun initViewPager() {
+        binding.viewPager2Orders.offscreenPageLimit = 1
+        binding.viewPager2Orders.adapter = viewPagerAdapter
+        val items = mutableListOf(
+            OrdersListFragment.newInstance(OrdersListFragment.ALL_TYPE),
+            OrdersListFragment.newInstance(OrdersListFragment.ACTIVE_TYPE)
+        )
+        viewPagerAdapter.setItems(items)
+
+        TabLayoutMediator(binding.tabLayoutOrders, binding.viewPager2Orders) { tab, position ->
+            when (position) {
+                0 -> tab.text =
+                    resources.getString(
+                        R.string.text_tab_all, 0
+                    )
+                1 -> tab.text =
+                    resources.getString(
+                        R.string.text_tab_active, 0
+                    )
+            }
+        }.attach()
     }
 }

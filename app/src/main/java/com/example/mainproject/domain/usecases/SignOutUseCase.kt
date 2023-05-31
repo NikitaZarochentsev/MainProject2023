@@ -1,10 +1,12 @@
 package com.example.mainproject.domain.usecases
 
-import com.example.mainproject.domain.repositories.MockRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 
-class SignOutUseCase(private val mockRepository: MockRepository) {
+class SignOutUseCase(
+    private val cowboysSharedPreferences: CowboysSharedPreferences,
+) {
 
     operator fun invoke() {
-        mockRepository.signOut()
+        cowboysSharedPreferences.removeToken()
     }
 }

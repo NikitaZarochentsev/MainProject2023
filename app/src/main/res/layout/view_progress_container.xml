@@ -47,11 +47,14 @@
 
         <TextView
             android:id="@+id/textViewTitleNotice"
-            style="@style/TextAppearance.ProgressContainer.Notice.H1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_150"
             android:gravity="center"
+            android:lineSpacingExtra="4sp"
+            android:textColor="@color/silver_chalice"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/textViewDescriptionNotice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -60,23 +63,28 @@
 
         <TextView
             android:id="@+id/textViewDescriptionNotice"
-            style="@style/TextAppearance.ProgressContainer.Notice.H2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_50"
             android:gravity="center"
+            android:lineSpacingExtra="8sp"
+            android:textColor="@color/silver_chalice"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/buttonNotice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleNotice" />
 
+        <!--        возможно нужно прописать android:textColor="@color/white"-->
         <Button
             android:id="@+id/buttonNotice"
-            style="@style/Theme.MainProject.Button.ProgressContainer.Notice"
+            style="@style/Theme.MainProject.FilledButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_200"
+            android:lineSpacingExtra="4sp"
             android:text="@string/button_refresh"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -33,11 +33,13 @@
 
         <TextView
             android:id="@+id/textViewNotice"
-            style="@style/TextAppearance.LastItemCatalog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/normal_100"
             android:layout_marginVertical="@dimen/normal_87"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonNotice"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,11 +47,14 @@
 
         <Button
             android:id="@+id/buttonNotice"
-            style="@style/Theme.MainProject.Button.LastItemCatalog"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/normal_100"
+            android:lineSpacingExtra="4sp"
             android:text="@string/progress_item_retry_button"
+            android:textAllCaps="true"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textViewNotice"

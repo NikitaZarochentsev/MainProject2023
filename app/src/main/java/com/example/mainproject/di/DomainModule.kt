@@ -1,6 +1,7 @@
 package com.example.mainproject.di
 
-import com.example.mainproject.domain.repositories.MockRepository
+import com.example.mainproject.data.CowboysRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 import com.example.mainproject.domain.usecases.*
 import dagger.Module
 import dagger.Provides
@@ -12,13 +13,27 @@ import dagger.hilt.android.components.ViewModelComponent
 class DomainModule {
 
     @Provides
-    fun provideGetProductsUseCase(mockRepository: MockRepository): GetProductsUseCase {
-        return GetProductsUseCase(mockRepository)
+    fun provideGetProductsUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): GetProductsUseCase {
+        return GetProductsUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 
     @Provides
-    fun provideGetProfileUseCase(mockRepository: MockRepository): GetProfileUseCase {
-        return GetProfileUseCase(mockRepository)
+    fun provideGetProfileUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): GetProfileUseCase {
+        return GetProfileUseCase(cowboysRepository, cowboysSharedPreferences)
+    }
+
+    @Provides
+    fun provideGetAvatarUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): GetAvatarUseCase {
+        return GetAvatarUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 
     @Provides
@@ -27,27 +42,63 @@ class DomainModule {
     }
 
     @Provides
-    fun provideSignInUseCase(mockRepository: MockRepository): SignInUseCase {
-        return SignInUseCase(mockRepository)
+    fun provideSignInUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): SignInUseCase {
+        return SignInUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 
     @Provides
-    fun provideSignOutUseCase(mockRepository: MockRepository): SignOutUseCase {
-        return SignOutUseCase(mockRepository)
+    fun provideSignOutUseCase(cowboysSharedPreferences: CowboysSharedPreferences): SignOutUseCase {
+        return SignOutUseCase(cowboysSharedPreferences)
     }
 
     @Provides
-    fun provideGetProductUseCase(mockRepository: MockRepository): GetProductUseCase {
-        return GetProductUseCase(mockRepository)
+    fun provideGetProductUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): GetProductUseCase {
+        return GetProductUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 
     @Provides
-    fun provideGetOrdersUseCase(mockRepository: MockRepository): GetOrdersUseCase {
-        return GetOrdersUseCase(mockRepository)
+    fun provideGetOrdersUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): GetOrdersUseCase {
+        return GetOrdersUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 
     @Provides
-    fun provideCancelOrderUseCase(mockRepository: MockRepository): CancelOrderUseCase {
-        return CancelOrderUseCase(mockRepository)
+    fun provideCancelOrderUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): CancelOrderUseCase {
+        return CancelOrderUseCase(cowboysRepository, cowboysSharedPreferences)
+    }
+
+    @Provides
+    fun provideCreateOrderUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): CreateOrderUseCase {
+        return CreateOrderUseCase(cowboysRepository, cowboysSharedPreferences)
+    }
+
+    @Provides
+    fun provideChangeProfileUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): ChangeProfileUseCase {
+        return ChangeProfileUseCase(cowboysRepository, cowboysSharedPreferences)
+    }
+
+    @Provides
+    fun provideChangePhotoUseCase(
+        cowboysRepository: CowboysRepository,
+        cowboysSharedPreferences: CowboysSharedPreferences,
+    ): ChangePhotoUseCase {
+        return ChangePhotoUseCase(cowboysRepository, cowboysSharedPreferences)
     }
 }

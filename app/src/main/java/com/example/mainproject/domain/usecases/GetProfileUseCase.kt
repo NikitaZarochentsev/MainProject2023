@@ -1,28 +1,31 @@
 package com.example.mainproject.domain.usecases
 
+import com.example.mainproject.data.CowboysRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 import com.example.mainproject.domain.models.Profile
-import com.example.mainproject.domain.repositories.MockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
-class GetProfileUseCase(private val mockRepository: MockRepository) {
+class GetProfileUseCase(
+    private val cowboysRepository: CowboysRepository,
+    private val cowboysSharedPreferences: CowboysSharedPreferences,
+) {
+
+    class AccessTokenInvalidException : Exception()
 
     suspend operator fun invoke(): Result<Profile> {
-        val products = CoroutineScope(Dispatchers.IO).async {
-            val profileResult = async {
-                mockRepository.getProfile()
-            }
-
-            profileResult.await()
-                .onSuccess {
-                    return@async Result.success(it)
-                }
-                .onFailure {
-                    Result.failure<Throwable>(it)
-                }
+        var resultUseCase: Result<Profile> = Result.failure(AccessTokenInvalidException())
+        val token = cowboysSharedPreferences.getToken() ?: return resultUseCase
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            cowboysRepository.getProfile(token)
         }
-
-        return products.await()
+            .onSuccess {
+                resultUseCase = Result.success(it.toProfileDomain())
+            }
+            .onFailure {
+                Result.failure<Throwable>(it)
+            }
+        return resultUseCase
     }
 }

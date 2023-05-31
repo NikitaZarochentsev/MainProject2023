@@ -7,10 +7,10 @@
     <ImageView
         android:id="@+id/imageViewPreviewViewHolderProduct"
         android:layout_width="@dimen/image_view_holder_product_preview_size"
-        android:padding="@dimen/normal_25"
         android:layout_height="@dimen/image_view_holder_product_preview_size"
         android:layout_marginVertical="@dimen/normal_100"
         android:background="@drawable/border_item_recycler_view"
+        android:padding="@dimen/normal_25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

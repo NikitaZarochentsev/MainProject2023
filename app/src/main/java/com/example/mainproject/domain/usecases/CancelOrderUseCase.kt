@@ -1,27 +1,30 @@
 package com.example.mainproject.domain.usecases
 
-import com.example.mainproject.domain.models.Order
-import com.example.mainproject.domain.repositories.MockRepository
+import com.example.mainproject.data.CowboysRepository
+import com.example.mainproject.data.CowboysSharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
-class CancelOrderUseCase(private val mockRepository: MockRepository) {
+class CancelOrderUseCase(
+    private val cowboysRepository: CowboysRepository,
+    private val cowboysSharedPreferences: CowboysSharedPreferences,
+) {
 
-    suspend operator fun invoke(orderId: String): Result<Order> {
-        val order = CoroutineScope(Dispatchers.IO).async {
-            val cancelOrderResult = async {
-                mockRepository.cancelOrder(orderId)
-            }
-            cancelOrderResult.await()
-                .onSuccess {
-                    return@async Result.success(it)
-                }
-                .onFailure {
-                    Result.failure<Throwable>(it)
-                }
+    class AccessTokenInvalidException : Exception()
+
+    suspend operator fun invoke(orderId: String): Result<Unit> {
+        var resultUseCase: Result<Unit> = Result.failure(AccessTokenInvalidException())
+        val token = cowboysSharedPreferences.getToken() ?: return resultUseCase
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            cowboysRepository.cancelOrder(token, orderId)
         }
-
-        return order.await()
+            .onSuccess {
+                resultUseCase = Result.success(Unit)
+            }
+            .onFailure {
+                resultUseCase = Result.failure(it)
+            }
+        return resultUseCase
     }
 }

@@ -1,11 +1,9 @@
 package com.example.mainproject.presentation.ui.profile
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -19,6 +17,7 @@ import coil.transform.CircleCropTransformation
 import com.example.mainproject.R
 import com.example.mainproject.databinding.FragmentProfileBinding
 import com.example.mainproject.presentation.ui.orders.OrdersFragment
+import com.example.mainproject.presentation.ui.settings.SettingsFragment
 import com.example.mainproject.presentation.ui.signin.SignInFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,9 +27,13 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel: ProfileViewModel by viewModels()
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getProfile()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getProfile()
         viewModel.getVersionApplication()
     }
 
@@ -58,11 +61,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        binding.buttonSettingsProfile.setOnClickListener {
-            Toast.makeText(view.context, binding.buttonSettingsProfile.text, Toast.LENGTH_SHORT)
-                .show()
-        }
-
         binding.buttonSignOutProfile.setOnClickListener {
             val signOutDialog = SignOutDialog {
                 viewModel.signOut()
@@ -79,9 +77,7 @@ class ProfileFragment : Fragment() {
         viewModel.profileUiState.observe(this as LifecycleOwner) { state ->
             when (state) {
                 is ProfileUiState.Default -> {
-                    binding.imageViewProfile.load(state.profile.avatarUrl) {
-                        placeholder(R.drawable.ic_logo)
-                        error(R.drawable.ic_logo)
+                    binding.imageViewProfile.load(R.drawable.ic_logo) {
                         transformations(CircleCropTransformation())
                     }
                     binding.textViewTitleProfile.text = getString(
@@ -90,6 +86,22 @@ class ProfileFragment : Fragment() {
                         state.profile.surname
                     )
                     binding.textViewSubtitleProfile.text = state.profile.occupation
+
+                    binding.buttonSettingsProfile.setOnClickListener {
+                        parentFragmentManager.commit {
+                            setReorderingAllowed(true)
+                            replace(
+                                R.id.fragmentContainerViewMain,
+                                SettingsFragment.newInstance(
+                                    state.profile.avatarId,
+                                    state.profile.name,
+                                    state.profile.surname,
+                                    state.profile.occupation
+                                )
+                            )
+                            addToBackStack(null)
+                        }
+                    }
                 }
                 is ProfileUiState.Out -> {
                     parentFragmentManager.popBackStack(
@@ -101,6 +113,14 @@ class ProfileFragment : Fragment() {
                         replace(R.id.fragmentContainerViewMain, SignInFragment())
                     }
                 }
+            }
+        }
+
+        viewModel.avatar.observe(this as LifecycleOwner) { avatar ->
+            binding.imageViewProfile.load(avatar) {
+                placeholder(R.drawable.ic_logo)
+                error(R.drawable.ic_logo)
+                transformations(CircleCropTransformation())
             }
         }
 

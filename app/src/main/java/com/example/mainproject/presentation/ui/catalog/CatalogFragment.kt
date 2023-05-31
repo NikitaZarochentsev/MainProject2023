@@ -1,6 +1,5 @@
 package com.example.mainproject.presentation.ui.catalog
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mainproject.R
 import com.example.mainproject.databinding.FragmentCatalogBinding
+import com.example.mainproject.presentation.ui.catalog.productslist.FooterProductsListAdapter
+import com.example.mainproject.presentation.ui.catalog.productslist.ProductsListAdapter
+import com.example.mainproject.presentation.ui.catalog.productslist.ProductsListItemDecoration
 import com.example.mainproject.presentation.ui.customviews.ProgressContainer
+import com.example.mainproject.presentation.ui.neworder.NewOrderFragment
+import com.example.mainproject.presentation.ui.product.ProductFragment
 import com.example.mainproject.presentation.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,13 +30,8 @@ class CatalogFragment : Fragment() {
 
     private lateinit var binding: FragmentCatalogBinding
     private val viewModel: CatalogViewModel by viewModels()
-    private lateinit var catalogAdapter: CatalogAdapter
-    private val footerAdapter = FooterCatalogAdapter()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        catalogAdapter = CatalogAdapter(parentFragmentManager)
-    }
+    private var productsListAdapter = ProductsListAdapter()
+    private val footerAdapter = FooterProductsListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,31 +92,65 @@ class CatalogFragment : Fragment() {
                 }
                 is CatalogUiState.FullListDisplay -> {
                     binding.progressContainerCatalog.state = ProgressContainer.State.Success
-                    footerAdapter.state = FooterCatalogAdapter.FooterState.Empty
-                    footerAdapter.remove()
+                    footerAdapter.setEmpty()
                 }
             }
         }
 
         viewModel.products.observe(this as LifecycleOwner) { products ->
-            if (products.isEmpty()){
+            if (products.isEmpty()) {
                 binding.progressContainerCatalog.state = ProgressContainer.State.Notice(
                     getString(R.string.progress_container_empty_title),
                     getString(R.string.progress_container_empty_description)
                 ) {
                     viewModel.updateProductList()
                 }
-            } else{
-                catalogAdapter.setProducts(products)
+            } else {
+                productsListAdapter.setProducts(products)
             }
         }
     }
 
     private fun initRecyclerView() {
-        binding.recyclerViewCatalog.adapter = ConcatAdapter(catalogAdapter, footerAdapter)
+        binding.recyclerViewCatalog.adapter = ConcatAdapter(productsListAdapter, footerAdapter)
         binding.recyclerViewCatalog.layoutManager =
             LinearLayoutManager(requireView().context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewCatalog.addItemDecoration(CatalogItemDecoration(binding.recyclerViewCatalog.context))
+        binding.recyclerViewCatalog.addItemDecoration(ProductsListItemDecoration(binding.recyclerViewCatalog.context))
+
+        productsListAdapter.setOnCLickListener(object : ProductsListAdapter.OnClickListener {
+            override fun onItemClicked(productId: String) {
+                parentFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace(R.id.fragmentContainerViewMain, ProductFragment.newInstance(productId))
+                    addToBackStack(null)
+                }
+            }
+
+            override fun onButtonBuyClicked(
+                imageUrl: String,
+                productSize: String,
+                productTitle: String,
+                productDepartment: String,
+                productPrice: Int,
+                productId: String,
+            ) {
+                parentFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace(
+                        R.id.fragmentContainerViewMain,
+                        NewOrderFragment.newInstance(
+                            imageUrl,
+                            productSize,
+                            productTitle,
+                            productDepartment,
+                            productPrice,
+                            productId
+                        )
+                    )
+                    addToBackStack(null)
+                }
+            }
+        })
 
         val layoutManager = binding.recyclerViewCatalog.layoutManager as LinearLayoutManager
         binding.recyclerViewCatalog.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -126,7 +159,7 @@ class CatalogFragment : Fragment() {
                 val itemCount = layoutManager.itemCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                if (!viewModel.isLoading && footerAdapter.state == FooterCatalogAdapter.FooterState.Loading && lastVisibleItem == itemCount - 1) {
+                if (!viewModel.isLoading && footerAdapter.state == FooterProductsListAdapter.FooterState.Loading && lastVisibleItem == itemCount - 1) {
                     viewModel.loadProductPage()
                 }
             }

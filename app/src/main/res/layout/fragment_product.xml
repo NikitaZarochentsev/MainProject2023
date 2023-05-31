@@ -36,8 +36,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutProduct"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/normal_100">
+                android:layout_height="match_parent">
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPagerIconsProduct"
@@ -59,9 +58,12 @@
 
                 <TextView
                     android:id="@+id/textViewCostProduct"
-                    style="@style/TextAppearance.Product.H1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
+                    android:lineSpacingExtra="2sp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
                     app:layout_constraintEnd_toStartOf="@+id/textViewBadgeProduct"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,12 +71,15 @@
 
                 <TextView
                     android:id="@+id/textViewBadgeProduct"
-                    style="@style/TextAppearance.Product.Badge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:background="@drawable/text_view_badge_background"
-                    android:paddingHorizontal="@dimen/badge_padding_horizontal"
-                    android:paddingVertical="@dimen/badge_padding_vertical"
+                    android:lineSpacingExtra="6sp"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toEndOf="@+id/textViewCostProduct"
@@ -82,19 +87,26 @@
 
                 <TextView
                     android:id="@+id/textViewTitleProduct"
-                    style="@style/TextAppearance.Product.H2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
+                    android:lineSpacingExtra="4sp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewCostProduct" />
 
                 <TextView
                     android:id="@+id/textViewDepartmentProduct"
-                    style="@style/TextAppearance.Product.H3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_25"
+                    android:lineSpacingExtra="4sp"
+                    android:textColor="@color/silver_chalice"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitleProduct" />
@@ -103,6 +115,7 @@
                     android:id="@+id/layoutSizeProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_100"
                     android:hint="@string/size_hint"
                     app:endIconDrawable="@drawable/ic_chevron_right"
@@ -121,10 +134,13 @@
 
                 <TextView
                     android:id="@+id/textViewDescriptionProduct"
-                    style="@style/TextAppearance.Product.H4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_100"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutSizeProduct"
@@ -134,6 +150,7 @@
                     android:id="@+id/imageViewDividerProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_100"
                     android:importantForAccessibility="no"
                     android:src="@drawable/divider_product"
@@ -145,6 +162,7 @@
                     android:id="@+id/recyclerViewDetailsProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_100"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -152,9 +170,10 @@
 
                 <Button
                     android:id="@+id/buttonBuy"
-                    style="@style/Theme.MainProject.Button.Product"
+                    style="@style/Theme.MainProject.FilledButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal_100"
                     android:layout_marginTop="@dimen/normal_200"
                     android:layout_marginBottom="@dimen/normal_100"
                     android:text="@string/buy_now_text"

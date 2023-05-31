@@ -5,7 +5,7 @@
 
     <Button
         android:id="@+id/button"
-        style="@style/Theme.MainProject.ProgressButton.SignIn"
+        style="@style/Theme.MainProject.FilledButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
